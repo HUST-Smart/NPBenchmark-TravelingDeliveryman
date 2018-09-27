@@ -1,0 +1,675 @@
+{
+ "nodeid": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "edges": [
+  {
+   "id": 0,
+   "cost": 22,
+   "source": 0,
+   "target": 1,
+   "minTime": 7
+  },
+  {
+   "id": 1,
+   "cost": 13,
+   "source": 1,
+   "target": 2,
+   "minTime": 6
+  },
+  {
+   "id": 2,
+   "cost": 43,
+   "source": 2,
+   "target": 3,
+   "minTime": 2
+  },
+  {
+   "id": 3,
+   "cost": 1,
+   "source": 3,
+   "target": 0,
+   "minTime": 8
+  },
+  {
+   "id": 4,
+   "cost": 2,
+   "source": 1,
+   "target": 3,
+   "minTime": 6
+  }
+ ],
+ "nodeRequireds": [
+  {
+   "id": 0,
+   "valueAtMoments": [
+    {
+     "moment": 2,
+     "value": 27
+    },
+    {
+     "moment": 3,
+     "value": 27
+    },
+    {
+     "moment": 4,
+     "value": 26
+    },
+    {
+     "moment": 5,
+     "value": 25
+    },
+    {
+     "moment": 6,
+     "value": 24
+    },
+    {
+     "moment": 7,
+     "value": 23
+    },
+    {
+     "moment": 8,
+     "value": 22
+    },
+    {
+     "moment": 9,
+     "value": 21
+    },
+    {
+     "moment": 10,
+     "value": 20
+    },
+    {
+     "moment": 11,
+     "value": 19
+    },
+    {
+     "moment": 12,
+     "value": 18
+    },
+    {
+     "moment": 13,
+     "value": 17
+    },
+    {
+     "moment": 14,
+     "value": 16
+    },
+    {
+     "moment": 15,
+     "value": 15
+    },
+    {
+     "moment": 16,
+     "value": 14
+    },
+    {
+     "moment": 17,
+     "value": 14
+    },
+    {
+     "moment": 18,
+     "value": 13
+    },
+    {
+     "moment": 19,
+     "value": 12
+    },
+    {
+     "moment": 20,
+     "value": 11
+    },
+    {
+     "moment": 21,
+     "value": 10
+    },
+    {
+     "moment": 22,
+     "value": 9
+    },
+    {
+     "moment": 23,
+     "value": 8
+    },
+    {
+     "moment": 24,
+     "value": 7
+    },
+    {
+     "moment": 25,
+     "value": 6
+    },
+    {
+     "moment": 26,
+     "value": 5
+    },
+    {
+     "moment": 27,
+     "value": 4
+    },
+    {
+     "moment": 28,
+     "value": 3
+    },
+    {
+     "moment": 29,
+     "value": 2
+    },
+    {
+     "moment": 30,
+     "value": 1
+    },
+    {
+     "moment": 31,
+     "value": 0
+    }
+   ]
+  },
+  {
+   "id": 1,
+   "valueAtMoments": [
+    {
+     "moment": 12,
+     "value": 87
+    },
+    {
+     "moment": 13,
+     "value": 84
+    },
+    {
+     "moment": 14,
+     "value": 81
+    },
+    {
+     "moment": 15,
+     "value": 78
+    },
+    {
+     "moment": 16,
+     "value": 75
+    },
+    {
+     "moment": 17,
+     "value": 72
+    },
+    {
+     "moment": 18,
+     "value": 69
+    },
+    {
+     "moment": 19,
+     "value": 66
+    },
+    {
+     "moment": 20,
+     "value": 63
+    },
+    {
+     "moment": 21,
+     "value": 60
+    },
+    {
+     "moment": 22,
+     "value": 57
+    },
+    {
+     "moment": 23,
+     "value": 54
+    },
+    {
+     "moment": 24,
+     "value": 51
+    },
+    {
+     "moment": 25,
+     "value": 48
+    },
+    {
+     "moment": 26,
+     "value": 45
+    },
+    {
+     "moment": 27,
+     "value": 42
+    },
+    {
+     "moment": 28,
+     "value": 39
+    },
+    {
+     "moment": 29,
+     "value": 36
+    },
+    {
+     "moment": 30,
+     "value": 33
+    },
+    {
+     "moment": 31,
+     "value": 30
+    },
+    {
+     "moment": 32,
+     "value": 27
+    },
+    {
+     "moment": 33,
+     "value": 24
+    },
+    {
+     "moment": 34,
+     "value": 21
+    },
+    {
+     "moment": 35,
+     "value": 18
+    },
+    {
+     "moment": 36,
+     "value": 15
+    },
+    {
+     "moment": 37,
+     "value": 12
+    },
+    {
+     "moment": 38,
+     "value": 9
+    },
+    {
+     "moment": 39,
+     "value": 6
+    },
+    {
+     "moment": 40,
+     "value": 3
+    },
+    {
+     "moment": 41,
+     "value": 0
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "valueAtMoments": [
+    {
+     "moment": 21,
+     "value": 16
+    },
+    {
+     "moment": 22,
+     "value": 16
+    },
+    {
+     "moment": 23,
+     "value": 15
+    },
+    {
+     "moment": 24,
+     "value": 15
+    },
+    {
+     "moment": 25,
+     "value": 14
+    },
+    {
+     "moment": 26,
+     "value": 14
+    },
+    {
+     "moment": 27,
+     "value": 13
+    },
+    {
+     "moment": 28,
+     "value": 13
+    },
+    {
+     "moment": 29,
+     "value": 12
+    },
+    {
+     "moment": 30,
+     "value": 12
+    },
+    {
+     "moment": 31,
+     "value": 11
+    },
+    {
+     "moment": 32,
+     "value": 10
+    },
+    {
+     "moment": 33,
+     "value": 10
+    },
+    {
+     "moment": 34,
+     "value": 9
+    },
+    {
+     "moment": 35,
+     "value": 9
+    },
+    {
+     "moment": 36,
+     "value": 8
+    },
+    {
+     "moment": 37,
+     "value": 8
+    },
+    {
+     "moment": 38,
+     "value": 7
+    },
+    {
+     "moment": 39,
+     "value": 7
+    },
+    {
+     "moment": 40,
+     "value": 6
+    },
+    {
+     "moment": 41,
+     "value": 5
+    },
+    {
+     "moment": 42,
+     "value": 5
+    },
+    {
+     "moment": 43,
+     "value": 4
+    },
+    {
+     "moment": 44,
+     "value": 4
+    },
+    {
+     "moment": 45,
+     "value": 3
+    },
+    {
+     "moment": 46,
+     "value": 3
+    },
+    {
+     "moment": 47,
+     "value": 2
+    },
+    {
+     "moment": 48,
+     "value": 2
+    },
+    {
+     "moment": 49,
+     "value": 1
+    },
+    {
+     "moment": 50,
+     "value": 0
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "valueAtMoments": [
+    {
+     "moment": 10,
+     "value": 97
+    },
+    {
+     "moment": 11,
+     "value": 94
+    },
+    {
+     "moment": 12,
+     "value": 91
+    },
+    {
+     "moment": 13,
+     "value": 87
+    },
+    {
+     "moment": 14,
+     "value": 84
+    },
+    {
+     "moment": 15,
+     "value": 81
+    },
+    {
+     "moment": 16,
+     "value": 77
+    },
+    {
+     "moment": 17,
+     "value": 74
+    },
+    {
+     "moment": 18,
+     "value": 71
+    },
+    {
+     "moment": 19,
+     "value": 67
+    },
+    {
+     "moment": 20,
+     "value": 64
+    },
+    {
+     "moment": 21,
+     "value": 61
+    },
+    {
+     "moment": 22,
+     "value": 57
+    },
+    {
+     "moment": 23,
+     "value": 54
+    },
+    {
+     "moment": 24,
+     "value": 51
+    },
+    {
+     "moment": 25,
+     "value": 47
+    },
+    {
+     "moment": 26,
+     "value": 44
+    },
+    {
+     "moment": 27,
+     "value": 41
+    },
+    {
+     "moment": 28,
+     "value": 37
+    },
+    {
+     "moment": 29,
+     "value": 34
+    },
+    {
+     "moment": 30,
+     "value": 31
+    },
+    {
+     "moment": 31,
+     "value": 27
+    },
+    {
+     "moment": 32,
+     "value": 24
+    },
+    {
+     "moment": 33,
+     "value": 21
+    },
+    {
+     "moment": 34,
+     "value": 17
+    },
+    {
+     "moment": 35,
+     "value": 14
+    },
+    {
+     "moment": 36,
+     "value": 11
+    },
+    {
+     "moment": 37,
+     "value": 7
+    },
+    {
+     "moment": 38,
+     "value": 4
+    },
+    {
+     "moment": 39,
+     "value": 0
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "valueAtMoments": [
+    {
+     "moment": 5,
+     "value": 79
+    },
+    {
+     "moment": 6,
+     "value": 77
+    },
+    {
+     "moment": 7,
+     "value": 74
+    },
+    {
+     "moment": 8,
+     "value": 71
+    },
+    {
+     "moment": 9,
+     "value": 69
+    },
+    {
+     "moment": 10,
+     "value": 66
+    },
+    {
+     "moment": 11,
+     "value": 63
+    },
+    {
+     "moment": 12,
+     "value": 60
+    },
+    {
+     "moment": 13,
+     "value": 58
+    },
+    {
+     "moment": 14,
+     "value": 55
+    },
+    {
+     "moment": 15,
+     "value": 52
+    },
+    {
+     "moment": 16,
+     "value": 50
+    },
+    {
+     "moment": 17,
+     "value": 47
+    },
+    {
+     "moment": 18,
+     "value": 44
+    },
+    {
+     "moment": 19,
+     "value": 41
+    },
+    {
+     "moment": 20,
+     "value": 39
+    },
+    {
+     "moment": 21,
+     "value": 36
+    },
+    {
+     "moment": 22,
+     "value": 33
+    },
+    {
+     "moment": 23,
+     "value": 30
+    },
+    {
+     "moment": 24,
+     "value": 28
+    },
+    {
+     "moment": 25,
+     "value": 25
+    },
+    {
+     "moment": 26,
+     "value": 22
+    },
+    {
+     "moment": 27,
+     "value": 20
+    },
+    {
+     "moment": 28,
+     "value": 17
+    },
+    {
+     "moment": 29,
+     "value": 14
+    },
+    {
+     "moment": 30,
+     "value": 11
+    },
+    {
+     "moment": 31,
+     "value": 9
+    },
+    {
+     "moment": 32,
+     "value": 6
+    },
+    {
+     "moment": 33,
+     "value": 3
+    },
+    {
+     "moment": 34,
+     "value": 0
+    }
+   ]
+  }
+ ],
+ "sourceNode": 0,
+ "targetNode": 0,
+ "periodLength": 40
+}

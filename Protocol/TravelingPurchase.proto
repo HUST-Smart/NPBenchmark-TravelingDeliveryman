@@ -1,0 +1,65 @@
+
+syntax = "proto3";
+package pb;
+
+
+option java_package = "pb";
+option java_outer_classname = "TravelingPurchase";
+
+// 主要数据.
+message TravelingPurchase { // 求解算法输入输出数据接口.
+	message Input { // 求解外卖配送问题所需的输入数据.
+		repeated int32 nodeid=1;//配送节点编号
+		repeated Edge edges=2;//配送路径信息
+		repeated NodeRequired nodeRequireds=3;//节点需求信息（时刻价值信息）
+		int32 sourceNode =4;//配送起始节点
+		int32 targetNode =5;//配送起始节点
+		int32 periodLength=6;//周期长度
+	}
+	message Output {//求解算法的输出数据
+		repeated int32 nodeid=1;//最终配送路径（访问节点及顺序）
+	}
+	message Submission { // 测评系统提交信息摘要.
+  	  // 应在 SDK 内由提交者手工填写的数据项.
+   		 string author = 1; // 提交者姓名.
+   		 string algorithm = 2; // 算法名称.
+    	 string thread = 3; // 算法线程数
+   		 string cpu = 4; // 处理器型号与主频.
+   		 string ram = 5; // 内存容量与频率. (Windows 下可以使用 wmic memorychip 命令查看)
+  		 string language = 6; // 编程语言.
+   		 string compiler = 7; // 编译器.
+   		 string os = 8; // 操作系统
+
+   	 // 由 SDK 自动记录的数据项.
+    		string problem = 21; // 问题名称.
+    		string instance = 22; // 算例名称.
+    		string duration = 23; // 求解耗时.
+
+    	// 由服务器自动计算的数据项.
+   			double obj = 31; // 计算结果目标函数值.
+    		string email = 32; // 提交者邮箱.
+    		string date = 33; // 提交时间.
+	}
+}
+
+//message Node {//节点信息
+	 
+	 //int32 id=1;//节点的编号
+	 //repeated ValueAtMoment valueAtMoments=2;//节点在各时刻的价值列表
+//}
+
+message Edge{//路径信息
+	int32 id=1;//路径（边）的编号
+	int32 cost=2;//路径开销
+	int32 source=3;//路径对应的起点
+	int32 target=4;//路径对应的终点
+	int32 minTime=5;//路径上所需的最小时间
+}
+message NodeRequired{
+	int32 id=1;//节点编号
+	repeated ValueAtMoment valueAtMoments=2;//节点在各时刻的价值列表
+}
+message ValueAtMoment{//各时刻价值列表
+	int32 moment=1;//时刻
+	int32 value=2;//对应时刻的价值
+}

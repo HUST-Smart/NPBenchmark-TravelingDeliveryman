@@ -178,6 +178,7 @@
     <ClInclude Include="..\Solver\PbReader.h" />
     <ClInclude Include="..\Solver\Problem.h" />
     <ClInclude Include="..\Solver\Solver.h" />
+    <ClInclude Include="..\Solver\TravelingPurchase.pb.h" />
     <ClInclude Include="..\Solver\Utility.h" />
     <ClInclude Include="Simulator.h" />
     <ClInclude Include="ThreadPool.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="..\Solver\CsvReader.cpp" />
     <ClCompile Include="..\Solver\GateAssignment.pb.cc" />
     <ClCompile Include="..\Solver\Solver.cpp" />
+    <ClCompile Include="..\Solver\TravelingPurchase.pb.cc" />
     <ClCompile Include="..\Solver\Utility.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Simulator.cpp" />

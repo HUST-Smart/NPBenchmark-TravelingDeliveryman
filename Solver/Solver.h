@@ -196,7 +196,7 @@ public:
     void record() const; // save running log.
 
 protected:
-    void init();
+   // void init();
     bool optimize(Solution &sln, ID workerId = 0); // optimize by a single worker.
     #pragma endregion Method
 

@@ -17,6 +17,7 @@
 #include "Common.h"
 #include "PbReader.h"
 #include "GateAssignment.pb.h"
+#include "TravelingPurchase.pb.h"
 
 
 namespace szx {
@@ -24,11 +25,11 @@ namespace szx {
 class Problem {
     #pragma region Type
 public:
-    struct Input : public pb::GateAssignment::Input {
+    struct Input : public pb::TravelingPurchase::Input {
         bool load(const String &path) { return pb::load(path, *this); }
     };
 
-    struct Output : public pb::GateAssignment::Output {
+    struct Output : public pb::TravelingPurchase::Output {
         bool save(const String &path, pb::Submission &submission) const {
             std::ofstream ofs(path);
             if (!ofs.is_open()) { return false; }
@@ -41,22 +42,31 @@ public:
             submission.set_language("C++");
             submission.set_compiler("VS2017");
             submission.set_os("Windows 10");
-            submission.set_problem("GateAssignment");
+            submission.set_problem("TravelingPurchase");
 
             ofs << protobufToJson(submission, false) << std::endl << protobufToJson(*this);
             return true;
         }
+		ID totalValue;
+		ID totalTime;
+		List<int> moment = { 0 };//记录各点到达的时刻
 
-        ID flightNumOnBridge = 0;
     };
     #pragma endregion Type
 
     #pragma region Constant
 public:
     enum {
-        MaxGateNum = 100,
+		MaxNodeNum = 100,
+		MaxEdgeNum = 7000,
+		MaxCost = 50,
+		MaxValue = 100,
+		upMinTime = 9,
+		MaxRequiredNum = 300,
+
+        /*MaxGateNum = 100,
         MaxBridgeNum = 30,
-        MaxFlightNum = 400,
+        MaxFlightNum = 400,*/
 
         InvalidId = -1,
     };

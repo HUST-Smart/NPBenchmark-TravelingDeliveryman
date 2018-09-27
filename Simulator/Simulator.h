@@ -38,13 +38,16 @@ public:
         String runId;
     };
 
-    struct InstanceTrait {
-        int horizonLen = 24 * 60;
-        Interval<int> gateNum = Interval<int>(60, Problem::MaxGateNum);
-        Interval<int> bridgeNum = Interval<int>(20, Problem::MaxBridgeNum);
-        Interval<int> flightNum = Interval<int>(100, Problem::MaxFlightNum);
-        Interval<int> incompatibleGateNumPerFlight = Interval<int>(0, 8);
-        Interval<int> turnaroundLen = Interval<int>(40, 8 * 60);
+	struct InstanceTrait {
+		// int horizonLen = 24 * 60;
+		int nodeNum = 80;
+		//Interval<int> nodeNum = Interval<int>(50, Problem::MaxNodeNum);//一般是确定好的
+		Interval<int> edgeNum = Interval<int>(nodeNum*(nodeNum - 1) / 4, nodeNum*(nodeNum - 1) / 2);
+		Interval<int> Cost = Interval<int>(0, Problem::MaxCost);
+		Interval<int> Value = Interval<int>(0, Problem::MaxValue);
+		Interval<int> upminTime = Interval<int>(1, Problem::upMinTime);
+		Interval<int> requiredNum = Interval<int>(nodeNum, nodeNum * 4);//Problem::MaxRequiredNum);
+		int periodLength = 110;
     };
     #pragma endregion Type
 
