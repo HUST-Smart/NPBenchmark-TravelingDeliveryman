@@ -277,8 +277,8 @@ bool Solver::optimize(Solution &sln, ID workerId) {
 	
 
    bool status = true;
-	auto &nodeid(*sln.mutable_nodeid());
-	nodeid.Resize(edgeNum, Problem::InvalidId);
+	auto &nodeid(*sln.add_nodeidatmoment());
+	//nodeid.Resize(edgeNum, Problem::InvalidId);
 	sln.totalValue = 0;
 	sln.totalTime = 0;
 
@@ -287,11 +287,28 @@ bool Solver::optimize(Solution &sln, ID workerId) {
     //    assignments[f] = rand.pick(gateNum);
     //    if (assignments[f] < bridgeNum) { ++sln.flightNumOnBridge; } // record obj.
     //}
-	nodeid[0] = input.sourcenode();
+
+	/*nodeid[0] = input.sourcenode();
 	for (ID i = 1; !timer.isTimeOut() && (i != 1 && nodeid[i - 1] != input.targetnode())&&i<requiredNum; ++i) {
 		nodeid[i] = rand.pick(nodeNum);
 	}
+*/
+	for (ID j = 0; !timer.isTimeOut() && sln.totalTime < periodLength; ++j) {
+		auto &nodeidatmoment(*sln.add_nodeidatmoment());
+		int temp = rand.pick(nodeNum);
+		if (j == 0) {
+			nodeidatmoment.set_nodeid = input.sourcenode();
+			nodeidatmoment.set_moment = 0;
+		}
+		else {
+			nodeidatmoment.set_nodeid = temp;
+			if (temp == input.targetnode())
+				nodeidatmoment.set_nodeid = temp;
+			nodeidatmoment.set_moment = rand.pick(10);
+		}
+		sln.totalTime = rand.pick(periodLength + 10);
 
+	}//²»ÍêÉÆ
 
     Log(LogSwitch::Szx::Framework) << "worker " << workerId << " ends." << endl;
     return status;

@@ -17,7 +17,8 @@ message TravelingPurchase { // 求解算法输入输出数据接口.
 		int32 periodLength=6;//周期长度
 	}
 	message Output {//求解算法的输出数据
-		repeated int32 nodeid=1;//最终配送路径（访问节点及顺序）
+		repeated NodeidAtmoment nodeidAtmoment=1;//最终的时空路线
+		//repeated int32 nodeid=2;//最终配送路径（访问节点及顺序）//改动
 	}
 	message Submission { // 测评系统提交信息摘要.
   	  // 应在 SDK 内由提交者手工填写的数据项.
@@ -62,4 +63,8 @@ message NodeRequired{
 message ValueAtMoment{//各时刻价值列表
 	int32 moment=1;//时刻
 	int32 value=2;//对应时刻的价值
+}
+message NodeidAtmoment{//送餐员的路径访问时间
+	int32 moment=1;//经过各点的时间
+	int32 nodeid=2;//经过的点
 }

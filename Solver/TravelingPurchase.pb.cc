@@ -21,6 +21,7 @@
 
 namespace protobuf_TravelingPurchase_2eproto {
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_TravelingPurchase_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Edge;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_TravelingPurchase_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_NodeidAtmoment;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_TravelingPurchase_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ValueAtMoment;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_TravelingPurchase_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_NodeRequired;
 }  // namespace protobuf_TravelingPurchase_2eproto
@@ -60,6 +61,11 @@ class ValueAtMomentDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<ValueAtMoment>
       _instance;
 } _ValueAtMoment_default_instance_;
+class NodeidAtmomentDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<NodeidAtmoment>
+      _instance;
+} _NodeidAtmoment_default_instance_;
 }  // namespace pb
 namespace protobuf_TravelingPurchase_2eproto {
 static void InitDefaultsTravelingPurchase_Input() {
@@ -89,8 +95,9 @@ static void InitDefaultsTravelingPurchase_Output() {
   ::pb::TravelingPurchase_Output::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_TravelingPurchase_Output =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsTravelingPurchase_Output}, {}};
+::google::protobuf::internal::SCCInfo<1> scc_info_TravelingPurchase_Output =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsTravelingPurchase_Output}, {
+      &protobuf_TravelingPurchase_2eproto::scc_info_NodeidAtmoment.base,}};
 
 static void InitDefaultsTravelingPurchase_Submission() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -163,6 +170,20 @@ static void InitDefaultsValueAtMoment() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_ValueAtMoment =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsValueAtMoment}, {}};
 
+static void InitDefaultsNodeidAtmoment() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::pb::_NodeidAtmoment_default_instance_;
+    new (ptr) ::pb::NodeidAtmoment();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::pb::NodeidAtmoment::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_NodeidAtmoment =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsNodeidAtmoment}, {}};
+
 void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_TravelingPurchase_Input.base);
   ::google::protobuf::internal::InitSCC(&scc_info_TravelingPurchase_Output.base);
@@ -171,9 +192,10 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_Edge.base);
   ::google::protobuf::internal::InitSCC(&scc_info_NodeRequired.base);
   ::google::protobuf::internal::InitSCC(&scc_info_ValueAtMoment.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_NodeidAtmoment.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[7];
+::google::protobuf::Metadata file_level_metadata[8];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -192,7 +214,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::TravelingPurchase_Output, nodeid_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::TravelingPurchase_Output, nodeidatmoment_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::TravelingPurchase_Submission, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -241,6 +263,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::ValueAtMoment, moment_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::ValueAtMoment, value_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::NodeidAtmoment, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::NodeidAtmoment, moment_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::NodeidAtmoment, nodeid_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::pb::TravelingPurchase_Input)},
@@ -250,6 +279,7 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 41, -1, sizeof(::pb::Edge)},
   { 51, -1, sizeof(::pb::NodeRequired)},
   { 58, -1, sizeof(::pb::ValueAtMoment)},
+  { 65, -1, sizeof(::pb::NodeidAtmoment)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -260,6 +290,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::pb::_Edge_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::pb::_NodeRequired_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::pb::_ValueAtMoment_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::pb::_NodeidAtmoment_default_instance_),
 };
 
 void protobuf_AssignDescriptors() {
@@ -277,33 +308,35 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 7);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 8);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\027TravelingPurchase.proto\022\002pb\"\262\003\n\021Travel"
+      "\n\027TravelingPurchase.proto\022\002pb\"\316\003\n\021Travel"
       "ingPurchase\032\227\001\n\005Input\022\016\n\006nodeid\030\001 \003(\005\022\027\n"
       "\005edges\030\002 \003(\0132\010.pb.Edge\022\'\n\rnodeRequireds\030"
       "\003 \003(\0132\020.pb.NodeRequired\022\022\n\nsourceNode\030\004 "
       "\001(\005\022\022\n\ntargetNode\030\005 \001(\005\022\024\n\014periodLength\030"
-      "\006 \001(\005\032\030\n\006Output\022\016\n\006nodeid\030\001 \003(\005\032\350\001\n\nSubm"
-      "ission\022\016\n\006author\030\001 \001(\t\022\021\n\talgorithm\030\002 \001("
-      "\t\022\016\n\006thread\030\003 \001(\t\022\013\n\003cpu\030\004 \001(\t\022\013\n\003ram\030\005 "
-      "\001(\t\022\020\n\010language\030\006 \001(\t\022\020\n\010compiler\030\007 \001(\t\022"
-      "\n\n\002os\030\010 \001(\t\022\017\n\007problem\030\025 \001(\t\022\020\n\010instance"
-      "\030\026 \001(\t\022\020\n\010duration\030\027 \001(\t\022\013\n\003obj\030\037 \001(\001\022\r\n"
-      "\005email\030  \001(\t\022\014\n\004date\030! \001(\t\"Q\n\004Edge\022\n\n\002id"
-      "\030\001 \001(\005\022\014\n\004cost\030\002 \001(\005\022\016\n\006source\030\003 \001(\005\022\016\n\006"
-      "target\030\004 \001(\005\022\017\n\007minTime\030\005 \001(\005\"E\n\014NodeReq"
-      "uired\022\n\n\002id\030\001 \001(\005\022)\n\016valueAtMoments\030\002 \003("
-      "\0132\021.pb.ValueAtMoment\".\n\rValueAtMoment\022\016\n"
-      "\006moment\030\001 \001(\005\022\r\n\005value\030\002 \001(\005B\027\n\002pbB\021Trav"
-      "elingPurchaseb\006proto3"
+      "\006 \001(\005\0324\n\006Output\022*\n\016nodeidAtmoment\030\001 \003(\0132"
+      "\022.pb.NodeidAtmoment\032\350\001\n\nSubmission\022\016\n\006au"
+      "thor\030\001 \001(\t\022\021\n\talgorithm\030\002 \001(\t\022\016\n\006thread\030"
+      "\003 \001(\t\022\013\n\003cpu\030\004 \001(\t\022\013\n\003ram\030\005 \001(\t\022\020\n\010langu"
+      "age\030\006 \001(\t\022\020\n\010compiler\030\007 \001(\t\022\n\n\002os\030\010 \001(\t\022"
+      "\017\n\007problem\030\025 \001(\t\022\020\n\010instance\030\026 \001(\t\022\020\n\010du"
+      "ration\030\027 \001(\t\022\013\n\003obj\030\037 \001(\001\022\r\n\005email\030  \001(\t"
+      "\022\014\n\004date\030! \001(\t\"Q\n\004Edge\022\n\n\002id\030\001 \001(\005\022\014\n\004co"
+      "st\030\002 \001(\005\022\016\n\006source\030\003 \001(\005\022\016\n\006target\030\004 \001(\005"
+      "\022\017\n\007minTime\030\005 \001(\005\"E\n\014NodeRequired\022\n\n\002id\030"
+      "\001 \001(\005\022)\n\016valueAtMoments\030\002 \003(\0132\021.pb.Value"
+      "AtMoment\".\n\rValueAtMoment\022\016\n\006moment\030\001 \001("
+      "\005\022\r\n\005value\030\002 \001(\005\"0\n\016NodeidAtmoment\022\016\n\006mo"
+      "ment\030\001 \001(\005\022\016\n\006nodeid\030\002 \001(\005B\027\n\002pbB\021Travel"
+      "ingPurchaseb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 701);
+      descriptor, 779);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "TravelingPurchase.proto", &protobuf_RegisterTypes);
 }
@@ -781,7 +814,7 @@ void TravelingPurchase_Input::InternalSwap(TravelingPurchase_Input* other) {
 void TravelingPurchase_Output::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int TravelingPurchase_Output::kNodeidFieldNumber;
+const int TravelingPurchase_Output::kNodeidAtmomentFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 TravelingPurchase_Output::TravelingPurchase_Output()
@@ -794,7 +827,7 @@ TravelingPurchase_Output::TravelingPurchase_Output()
 TravelingPurchase_Output::TravelingPurchase_Output(const TravelingPurchase_Output& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      nodeid_(from.nodeid_) {
+      nodeidatmoment_(from.nodeidatmoment_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:pb.TravelingPurchase.Output)
 }
@@ -830,7 +863,7 @@ void TravelingPurchase_Output::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  nodeid_.Clear();
+  nodeidatmoment_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -844,19 +877,12 @@ bool TravelingPurchase_Output::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated int32 nodeid = 1;
+      // repeated .pb.NodeidAtmoment nodeidAtmoment = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, this->mutable_nodeid())));
-        } else if (
-            static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 10u, input, this->mutable_nodeid())));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_nodeidatmoment()));
         } else {
           goto handle_unusual;
         }
@@ -889,15 +915,13 @@ void TravelingPurchase_Output::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated int32 nodeid = 1;
-  if (this->nodeid_size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteTag(1, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
-    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
-        _nodeid_cached_byte_size_));
-  }
-  for (int i = 0, n = this->nodeid_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32NoTag(
-      this->nodeid(i), output);
+  // repeated .pb.NodeidAtmoment nodeidAtmoment = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->nodeidatmoment_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1,
+      this->nodeidatmoment(static_cast<int>(i)),
+      output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -914,17 +938,12 @@ void TravelingPurchase_Output::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated int32 nodeid = 1;
-  if (this->nodeid_size() > 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
-      1,
-      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
-      target);
-    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
-        static_cast< ::google::protobuf::int32>(
-            _nodeid_cached_byte_size_), target);
+  // repeated .pb.NodeidAtmoment nodeidAtmoment = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->nodeidatmoment_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32NoTagToArray(this->nodeid_, target);
+      InternalWriteMessageToArray(
+        1, this->nodeidatmoment(static_cast<int>(i)), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -944,20 +963,15 @@ size_t TravelingPurchase_Output::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated int32 nodeid = 1;
+  // repeated .pb.NodeidAtmoment nodeidAtmoment = 1;
   {
-    size_t data_size = ::google::protobuf::internal::WireFormatLite::
-      Int32Size(this->nodeid_);
-    if (data_size > 0) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-            static_cast< ::google::protobuf::int32>(data_size));
+    unsigned int count = static_cast<unsigned int>(this->nodeidatmoment_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->nodeidatmoment(static_cast<int>(i)));
     }
-    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
-    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-    _nodeid_cached_byte_size_ = cached_size;
-    GOOGLE_SAFE_CONCURRENT_WRITES_END();
-    total_size += data_size;
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -987,7 +1001,7 @@ void TravelingPurchase_Output::MergeFrom(const TravelingPurchase_Output& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  nodeid_.MergeFrom(from.nodeid_);
+  nodeidatmoment_.MergeFrom(from.nodeidatmoment_);
 }
 
 void TravelingPurchase_Output::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1014,7 +1028,7 @@ void TravelingPurchase_Output::Swap(TravelingPurchase_Output* other) {
 }
 void TravelingPurchase_Output::InternalSwap(TravelingPurchase_Output* other) {
   using std::swap;
-  nodeid_.InternalSwap(&other->nodeid_);
+  CastToBase(&nodeidatmoment_)->InternalSwap(CastToBase(&other->nodeidatmoment_));
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -3084,6 +3098,271 @@ void ValueAtMoment::InternalSwap(ValueAtMoment* other) {
 }
 
 
+// ===================================================================
+
+void NodeidAtmoment::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int NodeidAtmoment::kMomentFieldNumber;
+const int NodeidAtmoment::kNodeidFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+NodeidAtmoment::NodeidAtmoment()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_TravelingPurchase_2eproto::scc_info_NodeidAtmoment.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:pb.NodeidAtmoment)
+}
+NodeidAtmoment::NodeidAtmoment(const NodeidAtmoment& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&moment_, &from.moment_,
+    static_cast<size_t>(reinterpret_cast<char*>(&nodeid_) -
+    reinterpret_cast<char*>(&moment_)) + sizeof(nodeid_));
+  // @@protoc_insertion_point(copy_constructor:pb.NodeidAtmoment)
+}
+
+void NodeidAtmoment::SharedCtor() {
+  ::memset(&moment_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&nodeid_) -
+      reinterpret_cast<char*>(&moment_)) + sizeof(nodeid_));
+}
+
+NodeidAtmoment::~NodeidAtmoment() {
+  // @@protoc_insertion_point(destructor:pb.NodeidAtmoment)
+  SharedDtor();
+}
+
+void NodeidAtmoment::SharedDtor() {
+}
+
+void NodeidAtmoment::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* NodeidAtmoment::descriptor() {
+  ::protobuf_TravelingPurchase_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_TravelingPurchase_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const NodeidAtmoment& NodeidAtmoment::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_TravelingPurchase_2eproto::scc_info_NodeidAtmoment.base);
+  return *internal_default_instance();
+}
+
+
+void NodeidAtmoment::Clear() {
+// @@protoc_insertion_point(message_clear_start:pb.NodeidAtmoment)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&moment_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&nodeid_) -
+      reinterpret_cast<char*>(&moment_)) + sizeof(nodeid_));
+  _internal_metadata_.Clear();
+}
+
+bool NodeidAtmoment::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:pb.NodeidAtmoment)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // int32 moment = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &moment_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 nodeid = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &nodeid_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:pb.NodeidAtmoment)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:pb.NodeidAtmoment)
+  return false;
+#undef DO_
+}
+
+void NodeidAtmoment::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:pb.NodeidAtmoment)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 moment = 1;
+  if (this->moment() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->moment(), output);
+  }
+
+  // int32 nodeid = 2;
+  if (this->nodeid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->nodeid(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:pb.NodeidAtmoment)
+}
+
+::google::protobuf::uint8* NodeidAtmoment::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:pb.NodeidAtmoment)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 moment = 1;
+  if (this->moment() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->moment(), target);
+  }
+
+  // int32 nodeid = 2;
+  if (this->nodeid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->nodeid(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:pb.NodeidAtmoment)
+  return target;
+}
+
+size_t NodeidAtmoment::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:pb.NodeidAtmoment)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // int32 moment = 1;
+  if (this->moment() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->moment());
+  }
+
+  // int32 nodeid = 2;
+  if (this->nodeid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->nodeid());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void NodeidAtmoment::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:pb.NodeidAtmoment)
+  GOOGLE_DCHECK_NE(&from, this);
+  const NodeidAtmoment* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const NodeidAtmoment>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:pb.NodeidAtmoment)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:pb.NodeidAtmoment)
+    MergeFrom(*source);
+  }
+}
+
+void NodeidAtmoment::MergeFrom(const NodeidAtmoment& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:pb.NodeidAtmoment)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.moment() != 0) {
+    set_moment(from.moment());
+  }
+  if (from.nodeid() != 0) {
+    set_nodeid(from.nodeid());
+  }
+}
+
+void NodeidAtmoment::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:pb.NodeidAtmoment)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void NodeidAtmoment::CopyFrom(const NodeidAtmoment& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:pb.NodeidAtmoment)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool NodeidAtmoment::IsInitialized() const {
+  return true;
+}
+
+void NodeidAtmoment::Swap(NodeidAtmoment* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void NodeidAtmoment::InternalSwap(NodeidAtmoment* other) {
+  using std::swap;
+  swap(moment_, other->moment_);
+  swap(nodeid_, other->nodeid_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata NodeidAtmoment::GetMetadata() const {
+  protobuf_TravelingPurchase_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_TravelingPurchase_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace pb
 namespace google {
@@ -3108,6 +3387,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::pb::NodeRequired* Arena::CreateM
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::pb::ValueAtMoment* Arena::CreateMaybeMessage< ::pb::ValueAtMoment >(Arena* arena) {
   return Arena::CreateInternal< ::pb::ValueAtMoment >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::pb::NodeidAtmoment* Arena::CreateMaybeMessage< ::pb::NodeidAtmoment >(Arena* arena) {
+  return Arena::CreateInternal< ::pb::NodeidAtmoment >(arena);
 }
 }  // namespace protobuf
 }  // namespace google
