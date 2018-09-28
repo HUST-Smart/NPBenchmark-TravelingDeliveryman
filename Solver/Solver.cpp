@@ -277,36 +277,40 @@ bool Solver::optimize(Solution &sln, ID workerId) {
 	
 
    bool status = true;
-	auto &nodeid(*sln.add_nodeidatmoment());
+	//auto &nodeid(*sln.add_nodeidatmoment());
 	//nodeid.Resize(edgeNum, Problem::InvalidId);
 	sln.totalValue = 0;
 	sln.totalTime = 0;
 
     // TODO[0]: replace the following random assignment with your own algorithm.
-    //for (ID f = 0; !timer.isTimeOut() && (f < flightNum); ++f) {
-    //    assignments[f] = rand.pick(gateNum);
-    //    if (assignments[f] < bridgeNum) { ++sln.flightNumOnBridge; } // record obj.
-    //}
+
 
 	/*nodeid[0] = input.sourcenode();
 	for (ID i = 1; !timer.isTimeOut() && (i != 1 && nodeid[i - 1] != input.targetnode())&&i<requiredNum; ++i) {
 		nodeid[i] = rand.pick(nodeNum);
 	}
 */
-	for (ID j = 0; !timer.isTimeOut() && sln.totalTime < periodLength; ++j) {
+	for (ID j = 0; !timer.isTimeOut() && sln.totalTime < periodLength && j<requiredNum; ++j) {
 		auto &nodeidatmoment(*sln.add_nodeidatmoment());
-		int temp = rand.pick(nodeNum);
+		int tempnodeid;
+		int tempmoment;
 		if (j == 0) {
-			nodeidatmoment.set_nodeid = input.sourcenode();
-			nodeidatmoment.set_moment = 0;
+			tempnodeid = input.sourcenode();
+			tempmoment = 0;
+			nodeidatmoment.set_nodeid (tempnodeid);
+			nodeidatmoment.set_moment (tempmoment);
 		}
 		else {
-			nodeidatmoment.set_nodeid = temp;
-			if (temp == input.targetnode())
-				nodeidatmoment.set_nodeid = temp;
-			nodeidatmoment.set_moment = rand.pick(10);
+			tempnodeid = rand.pick(nodeNum);
+			tempmoment = rand.pick(tempmoment, periodLength);
+			nodeidatmoment.set_nodeid(tempnodeid);
+			if (tempnodeid == input.targetnode())
+				nodeidatmoment.set_nodeid (tempnodeid);
+			nodeidatmoment.set_moment(tempmoment);
+			sln.totalTime = tempnodeid;
 		}
-		sln.totalTime = rand.pick(periodLength + 10);
+		//sln.totalTime = tempnodeid;
+		cout << sln.totalTime << endl;
 
 	}//²»ÍêÉÆ
 
