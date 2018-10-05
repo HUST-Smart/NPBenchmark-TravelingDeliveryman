@@ -65,7 +65,7 @@ int Solver::Cli::run(int argc, char * argv[]) {
     Solver solver(input, env, cfg);
     solver.solve();
 
-    pb::Submission submission;
+    pb::TravelingPurchase_Submission submission;
     submission.set_thread(to_string(env.jobNum));
     submission.set_instance(env.friendlyInstName());
     submission.set_duration(to_string(solver.timer.elapsedSeconds()) + "s");
@@ -153,7 +153,7 @@ void Solver::Configuration::save(const String &filePath) const {
 
 #pragma region Solver
 bool Solver::solve() {
-   // init();
+    init();
 
     int workerNum = (max)(1, env.jobNum / cfg.threadNumPerWorker);
     cfg.threadNumPerWorker = env.jobNum / workerNum;
@@ -166,7 +166,7 @@ bool Solver::solve() {
     for (int i = 0; i < workerNum; ++i) {
         // TODO[szx][2]: as *this is captured by ref, the solver should support concurrency itself, i.e., data members should be read-only or independent for each worker.
         // OPTIMIZE[szx][3]: add a list to specify a series of algorithm to be used by each threads in sequence.
-        threadList.emplace_back([&, i]() { success[i] = optimize(solutions[i], i); });
+		threadList.emplace_back([&, i]() { success[i] = optimize(solutions[i], i); });
     }
     for (int i = 0; i < workerNum; ++i) { threadList.at(i).join(); }
 
@@ -232,22 +232,21 @@ void Solver::record() const {
 
 bool Solver::check(Length &checkerObj) const {
     #if SZX_DEBUG
-    enum CheckerFlag {
-        IoError = 0x0,
-        /*FormatError = 0x1,
-        FlightNotAssignedError = 0x2,
-        IncompatibleAssignmentError = 0x4,
-        FlightOverlapError = 0x8*/
+	enum CheckerFlag {
+		IoError = 0x0,
+		FormatError = 0x1,
+		DisconnectedError = 0x2,
+		TotalValueError = 0x4
+
     };
 
     checkerObj = System::exec("Checker.exe " + env.instPath + " " + env.solutionPathWithTime());
     if (checkerObj > 0) { return true; }
     checkerObj = ~checkerObj;
     if (checkerObj == CheckerFlag::IoError) { Log(LogSwitch::Checker) << "IoError." << endl; }
-    /*if (checkerObj & CheckerFlag::FormatError) { Log(LogSwitch::Checker) << "FormatError." << endl; }
-    if (checkerObj & CheckerFlag::FlightNotAssignedError) { Log(LogSwitch::Checker) << "FlightNotAssignedError." << endl; }
-    if (checkerObj & CheckerFlag::IncompatibleAssignmentError) { Log(LogSwitch::Checker) << "IncompatibleAssignmentError." << endl; }
-    if (checkerObj & CheckerFlag::FlightOverlapError) { Log(LogSwitch::Checker) << "FlightOverlapError." << endl; }*/
+    if (checkerObj & CheckerFlag::FormatError) { Log(LogSwitch::Checker) << "FormatError." << endl; }
+	if (checkerObj & CheckerFlag::DisconnectedError) { Log(LogSwitch::Checker) << "DisconnectedError." << endl; }
+	if (checkerObj & CheckerFlag::TotalValueError ) { Log(LogSwitch::Checker) << "TotalValueError." << endl; }
     return false;
     #else
     checkerObj = 0;
@@ -255,7 +254,7 @@ bool Solver::check(Length &checkerObj) const {
     #endif // SZX_DEBUG
 }
 
-//void Solver::init() {
+void Solver::init() {
 //    aux.isCompatible.resize(input.flights().size(), List<bool>(input.airport().gates().size(), true));
 //    ID f = 0;
 //    for (auto flight = input.flights().begin(); flight != input.flights().end(); ++flight, ++f) {
@@ -263,7 +262,7 @@ bool Solver::check(Length &checkerObj) const {
 //            aux.isCompatible[f][*ig] = false;
 //        }
 //    }
-//}
+}
 
 bool Solver::optimize(Solution &sln, ID workerId) {
     Log(LogSwitch::Szx::Framework) << "worker " << workerId << " starts." << endl;
@@ -277,19 +276,18 @@ bool Solver::optimize(Solution &sln, ID workerId) {
 	
 
    bool status = true;
-	//auto &nodeid(*sln.add_nodeidatmoment());
-	//nodeid.Resize(edgeNum, Problem::InvalidId);
+	
 	sln.totalValue = 0;
 	sln.totalTime = 0;
 
     // TODO[0]: replace the following random assignment with your own algorithm.
 
-
-	/*nodeid[0] = input.sourcenode();
+	/*auto &nodeid(*sln.add_nodeidatmoment());
+	nodeid.Resize(edgeNum, Problem::InvalidId);
+	nodeid[0] = input.sourcenode();
 	for (ID i = 1; !timer.isTimeOut() && (i != 1 && nodeid[i - 1] != input.targetnode())&&i<requiredNum; ++i) {
 		nodeid[i] = rand.pick(nodeNum);
-	}
-*/
+	}*/
 	for (ID j = 0; !timer.isTimeOut() && sln.totalTime < periodLength && j<requiredNum; ++j) {
 		auto &nodeidatmoment(*sln.add_nodeidatmoment());
 		int tempnodeid;
@@ -299,20 +297,49 @@ bool Solver::optimize(Solution &sln, ID workerId) {
 			tempmoment = 0;
 			nodeidatmoment.set_nodeid (tempnodeid);
 			nodeidatmoment.set_moment (tempmoment);
+
+			for (auto re = input.noderequireds().begin(); re != input.noderequireds().end(); ++re) {
+				if (tempnodeid == re->nodeid())
+					for (auto vam = re->valueatmoments().begin(); vam != re->valueatmoments().end(); ++vam) {
+						if (tempmoment== vam->moment()) {
+							sln.totalValue += vam->value();
+							break;
+						}
+						else if (tempmoment <= vam->moment()) {
+							break;
+						}
+
+					}
+			}
+
 		}
 		else {
 			tempnodeid = rand.pick(nodeNum);
 			tempmoment = rand.pick(tempmoment, periodLength);
 			nodeidatmoment.set_nodeid(tempnodeid);
-			if (tempnodeid == input.targetnode())
-				nodeidatmoment.set_nodeid (tempnodeid);
 			nodeidatmoment.set_moment(tempmoment);
-			sln.totalTime = tempnodeid;
-		}
-		//sln.totalTime = tempnodeid;
-		cout << sln.totalTime << endl;
+			for (auto re = input.noderequireds().begin(); re != input.noderequireds().end(); ++re) {
+				if (tempnodeid == re->nodeid())
+					for (auto vam = re->valueatmoments().begin(); vam != re->valueatmoments().end(); ++vam) {
+						if (tempmoment == vam->moment()) {
+							sln.totalValue += vam->value();
+							break;
+						}
+						else if (tempmoment <= vam->moment()) {
+							break;
+						}
 
-	}//≤ªÕÍ…∆
+					}
+			}
+			if (tempnodeid == input.targetnode()) {
+				break;
+			}	
+			
+		}
+		sln.totalTime = tempmoment;
+
+	}
+	
 
     Log(LogSwitch::Szx::Framework) << "worker " << workerId << " ends." << endl;
     return status;

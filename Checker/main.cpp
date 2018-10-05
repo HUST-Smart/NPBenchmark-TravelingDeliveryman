@@ -3,23 +3,21 @@
 #include <sstream>
 #include <string>
 
-#include "Visualizer.h"
+//#include "Visualizer.h"
 
 #include "../Solver/PbReader.h"
-//#include "../Solver/GateAssignment.pb.h"
 #include "../Solver/TravelingPurchase.pb.h"
 
 using namespace std;
-using namespace szx;
+//using namespace szx;
 using namespace pb;
 
 int main(int argc, char *argv[]) {
-    enum CheckerFlag {
-        IoError = 0x0,
-        FormatError = 0x1,
-        FlightNotAssignedError = 0x2,
-        IncompatibleAssignmentError = 0x4,
-        FlightOverlapError = 0x8
+	enum CheckerFlag {
+		IoError = 0x0,
+		FormatError = 0x1,
+		DisconnectedError = 0x2,
+		TotalValueError = 0x4
     };
 
     string inputPath;
@@ -39,7 +37,6 @@ int main(int argc, char *argv[]) {
         cin >> outputPath;
     }
 	pb::TravelingPurchase::Input input;
-    //pb::GateAssignment::Input input;
     if (!load(inputPath, input)) { return ~CheckerFlag::IoError; }
 
     pb::TravelingPurchase::Output output;
@@ -50,29 +47,54 @@ int main(int argc, char *argv[]) {
     ostringstream oss;
     oss << ifs.rdbuf();
     jsonToProtobuf(oss.str(), output);
-
+	
     // check solution.
-    //int error = 0;
-    //int flightNumOnBridge = 0;
-    //if (output.assignments().size() != input.flights().size()) { error |= CheckerFlag::FormatError; }
-    //int f = 0;
-    //for (auto gate = output.assignments().begin(); gate != output.assignments().end(); ++gate, ++f) {
-    //    // check constraints.
-    //    if ((*gate < 0) || (*gate >= input.airport().gates().size())) { error |= CheckerFlag::FlightNotAssignedError; }
-    //    for (auto ig = input.flights(f).incompatiblegates().begin(); ig != input.flights(f).incompatiblegates().end(); ++ig) {
-    //        if (*gate == *ig) { error |= CheckerFlag::IncompatibleAssignmentError; }
-    //    }
-    //    const auto &flight(input.flights(f));
-    //    for (auto flight1 = input.flights().begin(); flight1 != input.flights().end(); ++flight1) {
-    //        if (*gate != output.assignments(flight1->id())) { continue; }
-    //        int gap = max(flight.turnaround().begin() - flight1->turnaround().end(),
-    //            flight1->turnaround().begin() - flight.turnaround().begin());
-    //        if (gap < input.airport().gates(*gate).mingap()) { error |= CheckerFlag::FlightOverlapError; }
-    //    }
+	int error = 0;
+	
+	for (auto temp = output.nodeidatmoment().begin(); temp != output.nodeidatmoment().end(); ++temp) {
 
-    //    // check objective.
-    //    if (*gate < input.airport().bridgenum()) { ++flightNumOnBridge; }
-    //}
+		if (temp->nodeid() < 0 || temp->nodeid() >= input.nodeid().size()||temp->moment()>=input.periodlength()|| output.nodeidatmoment().begin()->nodeid()==input.sourcenode()|| output.nodeidatmoment().begin()->nodeid()==input.targetnode())
+		{
+			error |= CheckerFlag::FormatError;
+		}
+	}
+	//check connectivity.
+	int totalValue=0;
+	for (auto temp = output.nodeidatmoment().begin(); temp != output.nodeidatmoment().end()-1; ++temp) {
+		int flag = 0;
+		for (auto in = input.edges().begin(); in != input.edges().end(); ++in) {
+			if ((temp->nodeid() == in->source() && (temp + 1)->nodeid() == in->target())|| (temp->nodeid() == in->target() && (temp + 1)->nodeid() == in->source()))
+				flag = 1;
+		}
+		if (flag == 0) {
+			cout << "path " << temp->nodeid() << " to " << (temp + 1)->nodeid() << " is not connected!!" << endl;
+			error |= CheckerFlag::DisconnectedError;
+			
+		}
+		//check obj.
+		vector<int> reFlag(input.noderequireds().size(),0) ;
+		for (auto re = input.noderequireds().begin(); re != input.noderequireds().end(); ++re) {
+			if (temp->nodeid() == re->nodeid()&& reFlag[re->id()] != 1)
+			for (auto vam = re->valueatmoments().begin(); vam != re->valueatmoments().end(); ++vam) {
+				if (temp->moment() == vam->moment()) {
+					totalValue += vam ->value();
+					reFlag[re->id()] = 1;//标记已被访问
+					break;
+				}
+				else if (temp->moment() <= vam->moment()) {
+					break;
+				}
+					
+			}
+		}
+		
+		//error |= CheckerFlag::TotalValueError;
+		
+
+	}
+	cout << "the true totalvalue is " << totalValue << endl;
+
+   
 
     //// visualize solution.
     //double pixelPerMinute = 1;
@@ -101,5 +123,5 @@ int main(int argc, char *argv[]) {
     //}
     //draw.end();
 
-   // return (error == 0) ? flightNumOnBridge : ~error;
+    return (error == 0) ? totalValue : ~error;
 }

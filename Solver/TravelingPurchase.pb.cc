@@ -255,6 +255,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::NodeRequired, id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::NodeRequired, nodeid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::NodeRequired, valueatmoments_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::pb::ValueAtMoment, _internal_metadata_),
@@ -278,8 +279,8 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 36, -1, sizeof(::pb::TravelingPurchase)},
   { 41, -1, sizeof(::pb::Edge)},
   { 51, -1, sizeof(::pb::NodeRequired)},
-  { 58, -1, sizeof(::pb::ValueAtMoment)},
-  { 65, -1, sizeof(::pb::NodeidAtmoment)},
+  { 59, -1, sizeof(::pb::ValueAtMoment)},
+  { 66, -1, sizeof(::pb::NodeidAtmoment)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -328,15 +329,15 @@ void AddDescriptorsImpl() {
       "ration\030\027 \001(\t\022\013\n\003obj\030\037 \001(\001\022\r\n\005email\030  \001(\t"
       "\022\014\n\004date\030! \001(\t\"Q\n\004Edge\022\n\n\002id\030\001 \001(\005\022\014\n\004co"
       "st\030\002 \001(\005\022\016\n\006source\030\003 \001(\005\022\016\n\006target\030\004 \001(\005"
-      "\022\017\n\007minTime\030\005 \001(\005\"E\n\014NodeRequired\022\n\n\002id\030"
-      "\001 \001(\005\022)\n\016valueAtMoments\030\002 \003(\0132\021.pb.Value"
-      "AtMoment\".\n\rValueAtMoment\022\016\n\006moment\030\001 \001("
-      "\005\022\r\n\005value\030\002 \001(\005\"0\n\016NodeidAtmoment\022\016\n\006mo"
-      "ment\030\001 \001(\005\022\016\n\006nodeid\030\002 \001(\005B\027\n\002pbB\021Travel"
-      "ingPurchaseb\006proto3"
+      "\022\017\n\007minTime\030\005 \001(\005\"U\n\014NodeRequired\022\n\n\002id\030"
+      "\001 \001(\005\022\016\n\006nodeid\030\002 \001(\005\022)\n\016valueAtMoments\030"
+      "\003 \003(\0132\021.pb.ValueAtMoment\".\n\rValueAtMomen"
+      "t\022\016\n\006moment\030\001 \001(\005\022\r\n\005value\030\002 \001(\005\"0\n\016Node"
+      "idAtmoment\022\016\n\006moment\030\001 \001(\005\022\016\n\006nodeid\030\002 \001"
+      "(\005B\027\n\002pbB\021TravelingPurchaseb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 779);
+      descriptor, 795);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "TravelingPurchase.proto", &protobuf_RegisterTypes);
 }
@@ -2571,6 +2572,7 @@ void NodeRequired::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int NodeRequired::kIdFieldNumber;
+const int NodeRequired::kNodeidFieldNumber;
 const int NodeRequired::kValueAtMomentsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -2586,12 +2588,16 @@ NodeRequired::NodeRequired(const NodeRequired& from)
       _internal_metadata_(NULL),
       valueatmoments_(from.valueatmoments_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  id_ = from.id_;
+  ::memcpy(&id_, &from.id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&nodeid_) -
+    reinterpret_cast<char*>(&id_)) + sizeof(nodeid_));
   // @@protoc_insertion_point(copy_constructor:pb.NodeRequired)
 }
 
 void NodeRequired::SharedCtor() {
-  id_ = 0;
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&nodeid_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(nodeid_));
 }
 
 NodeRequired::~NodeRequired() {
@@ -2623,7 +2629,9 @@ void NodeRequired::Clear() {
   (void) cached_has_bits;
 
   valueatmoments_.Clear();
-  id_ = 0;
+  ::memset(&id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&nodeid_) -
+      reinterpret_cast<char*>(&id_)) + sizeof(nodeid_));
   _internal_metadata_.Clear();
 }
 
@@ -2651,10 +2659,24 @@ bool NodeRequired::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .pb.ValueAtMoment valueAtMoments = 2;
+      // int32 nodeid = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &nodeid_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .pb.ValueAtMoment valueAtMoments = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
                 input, add_valueatmoments()));
         } else {
@@ -2694,11 +2716,16 @@ void NodeRequired::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
 
-  // repeated .pb.ValueAtMoment valueAtMoments = 2;
+  // int32 nodeid = 2;
+  if (this->nodeid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->nodeid(), output);
+  }
+
+  // repeated .pb.ValueAtMoment valueAtMoments = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->valueatmoments_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2,
+      3,
       this->valueatmoments(static_cast<int>(i)),
       output);
   }
@@ -2722,12 +2749,17 @@ void NodeRequired::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
 
-  // repeated .pb.ValueAtMoment valueAtMoments = 2;
+  // int32 nodeid = 2;
+  if (this->nodeid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->nodeid(), target);
+  }
+
+  // repeated .pb.ValueAtMoment valueAtMoments = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->valueatmoments_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->valueatmoments(static_cast<int>(i)), deterministic, target);
+        3, this->valueatmoments(static_cast<int>(i)), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -2747,7 +2779,7 @@ size_t NodeRequired::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated .pb.ValueAtMoment valueAtMoments = 2;
+  // repeated .pb.ValueAtMoment valueAtMoments = 3;
   {
     unsigned int count = static_cast<unsigned int>(this->valueatmoments_size());
     total_size += 1UL * count;
@@ -2763,6 +2795,13 @@ size_t NodeRequired::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->id());
+  }
+
+  // int32 nodeid = 2;
+  if (this->nodeid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->nodeid());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -2796,6 +2835,9 @@ void NodeRequired::MergeFrom(const NodeRequired& from) {
   if (from.id() != 0) {
     set_id(from.id());
   }
+  if (from.nodeid() != 0) {
+    set_nodeid(from.nodeid());
+  }
 }
 
 void NodeRequired::CopyFrom(const ::google::protobuf::Message& from) {
@@ -2824,6 +2866,7 @@ void NodeRequired::InternalSwap(NodeRequired* other) {
   using std::swap;
   CastToBase(&valueatmoments_)->InternalSwap(CastToBase(&other->valueatmoments_));
   swap(id_, other->id_);
+  swap(nodeid_, other->nodeid_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 

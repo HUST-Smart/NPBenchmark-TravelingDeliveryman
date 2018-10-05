@@ -57,8 +57,9 @@ message Edge{//路径信息
 	int32 minTime=5;//路径上所需的最小时间
 }
 message NodeRequired{
-	int32 id=1;//节点编号
-	repeated ValueAtMoment valueAtMoments=2;//节点在各时刻的价值列表
+	int32 id=1;//需求编号
+	int32 nodeid=2;//节点编号
+	repeated ValueAtMoment valueAtMoments=3;//节点在各时刻的价值列表
 }
 message ValueAtMoment{//各时刻价值列表
 	int32 moment=1;//时刻

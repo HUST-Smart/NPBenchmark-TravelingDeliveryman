@@ -16,7 +16,6 @@
 
 #include "Common.h"
 #include "PbReader.h"
-#include "GateAssignment.pb.h"
 #include "TravelingPurchase.pb.h"
 
 
@@ -30,7 +29,7 @@ public:
     };
 
     struct Output : public pb::TravelingPurchase::Output {
-        bool save(const String &path, pb::Submission &submission) const {
+        bool save(const String &path, pb::TravelingPurchase_Submission &submission) const {
             std::ofstream ofs(path);
             if (!ofs.is_open()) { return false; }
 
@@ -49,7 +48,6 @@ public:
         }
 		ID totalValue;
 		ID totalTime;
-		List<int> moment = { 0 };//记录各点到达的时刻
 
     };
     #pragma endregion Type
@@ -64,9 +62,6 @@ public:
 		upMinTime = 9,
 		MaxRequiredNum = 300,
 
-        /*MaxGateNum = 100,
-        MaxBridgeNum = 30,
-        MaxFlightNum = 400,*/
 
         InvalidId = -1,
     };

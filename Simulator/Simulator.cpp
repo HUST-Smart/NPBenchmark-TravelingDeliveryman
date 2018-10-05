@@ -99,7 +99,7 @@ namespace szx {
 	void Simulator::debug() {
 		Task task;
 		task.instSet = "";
-		task.instId = "rand.n4e5p40";
+		task.instId = "rand.n4e5r5p40";
 		task.randSeed = "1500972793";
 		//task.randSeed = to_string(RandSeed::generate());
 		task.timeout = "180";
@@ -126,7 +126,7 @@ namespace szx {
 		random_device rd;
 		mt19937 rgen(rd());
 		// EXTEND[szx][5]: read it from InstanceList.txt.
-		vector<String> instList({ "rand.n4e5p40", "rand.n80e2644p110" });
+		vector<String> instList({ "rand.n4e5r5p40", "rand.n80e2382r112p110" });
 		for (int i = 0; i < repeat; ++i) {
 			//shuffle(instList.begin(), instList.end(), rgen);
 			for (auto inst = instList.begin(); inst != instList.end(); ++inst) {
@@ -154,7 +154,7 @@ namespace szx {
 		random_device rd;
 		mt19937 rgen(rd());
 		// EXTEND[szx][5]: read it from InstanceList.txt.
-		vector<String> instList({ "rand.n4e5p40", "rand.n80e2644p110" });
+		vector<String> instList({ "rand.n4e5r5p40", "rand.n80e2382r112p110" });
 		for (int i = 0; i < repeat; ++i) {
 			//shuffle(instList.begin(), instList.end(), rgen);
 			for (auto inst = instList.begin(); inst != instList.end(); ++inst) {
@@ -266,9 +266,9 @@ namespace szx {
 		for (int r = 0; r != requriedNum; ++r) {
 			auto &required(*input.add_noderequireds());
 			//int Cost = rand.pick(trait.Cost.begin, trait.Cost.end);
-
+			required.set_id(r);
 			if (r < nodeNum) {//保证每个点至少一个需求
-				required.set_id(r);
+				required.set_nodeid(r);
 				int moment = rand.pick(0, 30);//价值产生时间，衰减周期确定
 				int  value = rand.pick(trait.Value.begin, trait.Value.end);
 				int temp = 0;
@@ -281,7 +281,7 @@ namespace szx {
 				}
 			}
 			else {
-				required.set_id(rand.pick(nodeNum));
+				required.set_nodeid(rand.pick(nodeNum));
 				int moment = rand.pick(0, trait.periodLength - 30);
 				int  value = rand.pick(trait.Value.begin, trait.Value.end);
 				int temp = 0;
@@ -300,6 +300,7 @@ namespace szx {
 		ostringstream path;
 		path << InstanceDir() << "rand.n" << input.nodeid().size()
 			<< "e" << input.edges().size()
+			<< "r" << input.noderequireds().size()
 			<< "p" << trait.periodLength << ".json";
 		save(path.str(), input);
 	}

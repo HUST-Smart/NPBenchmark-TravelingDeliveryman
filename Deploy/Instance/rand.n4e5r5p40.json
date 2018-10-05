@@ -44,7 +44,8 @@
  ],
  "nodeRequireds": [
   {
-   "id": 0,
+    "id": 0,
+    "nodeid": 0,
    "valueAtMoments": [
     {
      "moment": 2,
@@ -169,7 +170,8 @@
    ]
   },
   {
-   "id": 1,
+    "id": 1,
+    "nodeid": 1,
    "valueAtMoments": [
     {
      "moment": 12,
@@ -294,7 +296,8 @@
    ]
   },
   {
-   "id": 2,
+    "id": 2,
+    "nodeid": 2,
    "valueAtMoments": [
     {
      "moment": 21,
@@ -419,7 +422,8 @@
    ]
   },
   {
-   "id": 3,
+    "id": 3,
+    "nodeid": 3,
    "valueAtMoments": [
     {
      "moment": 10,
@@ -544,7 +548,8 @@
    ]
   },
   {
-   "id": 2,
+    "id": 5,
+    "nodeid": 2,
    "valueAtMoments": [
     {
      "moment": 5,

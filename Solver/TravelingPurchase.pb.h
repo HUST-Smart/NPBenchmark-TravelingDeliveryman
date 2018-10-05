@@ -969,10 +969,10 @@ class NodeRequired : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // repeated .pb.ValueAtMoment valueAtMoments = 2;
+  // repeated .pb.ValueAtMoment valueAtMoments = 3;
   int valueatmoments_size() const;
   void clear_valueatmoments();
-  static const int kValueAtMomentsFieldNumber = 2;
+  static const int kValueAtMomentsFieldNumber = 3;
   ::pb::ValueAtMoment* mutable_valueatmoments(int index);
   ::google::protobuf::RepeatedPtrField< ::pb::ValueAtMoment >*
       mutable_valueatmoments();
@@ -987,12 +987,19 @@ class NodeRequired : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::int32 id() const;
   void set_id(::google::protobuf::int32 value);
 
+  // int32 nodeid = 2;
+  void clear_nodeid();
+  static const int kNodeidFieldNumber = 2;
+  ::google::protobuf::int32 nodeid() const;
+  void set_nodeid(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:pb.NodeRequired)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::pb::ValueAtMoment > valueatmoments_;
   ::google::protobuf::int32 id_;
+  ::google::protobuf::int32 nodeid_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_TravelingPurchase_2eproto::TableStruct;
 };
@@ -2196,7 +2203,21 @@ inline void NodeRequired::set_id(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:pb.NodeRequired.id)
 }
 
-// repeated .pb.ValueAtMoment valueAtMoments = 2;
+// int32 nodeid = 2;
+inline void NodeRequired::clear_nodeid() {
+  nodeid_ = 0;
+}
+inline ::google::protobuf::int32 NodeRequired::nodeid() const {
+  // @@protoc_insertion_point(field_get:pb.NodeRequired.nodeid)
+  return nodeid_;
+}
+inline void NodeRequired::set_nodeid(::google::protobuf::int32 value) {
+  
+  nodeid_ = value;
+  // @@protoc_insertion_point(field_set:pb.NodeRequired.nodeid)
+}
+
+// repeated .pb.ValueAtMoment valueAtMoments = 3;
 inline int NodeRequired::valueatmoments_size() const {
   return valueatmoments_.size();
 }
