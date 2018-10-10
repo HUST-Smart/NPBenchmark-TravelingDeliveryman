@@ -19,12 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Solver\GateAssignment.pb.cc" />
     <ClCompile Include="..\Solver\TravelingPurchase.pb.cc" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Solver\GateAssignment.pb.h" />
     <ClInclude Include="..\Solver\PbReader.h" />
     <ClInclude Include="..\Solver\TravelingPurchase.pb.h" />
     <ClInclude Include="Visualizer.h" />

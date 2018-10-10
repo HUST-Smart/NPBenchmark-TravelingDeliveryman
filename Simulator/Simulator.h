@@ -5,8 +5,8 @@
 /// note :  1.
 ////////////////////////////////
 
-#ifndef SIMULATOR_H
-#define SIMULATOR_H
+#ifndef ZQY_TRAVELING_PURCHASER_SIMULATOR_H
+#define ZQY_TRAVELING_PURCHASER_SIMULATOR_H
 
 
 #include <string>
@@ -97,4 +97,4 @@ public:
 }
 
 
-#endif  // SIMULATOR_H
+#endif  // ZQY_TRAVELING_PURCHASER_SIMULATOR_H

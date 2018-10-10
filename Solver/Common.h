@@ -4,8 +4,8 @@
 /// note  : 1.	
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_COMMON_H
-#define SMART_SZX_GATE_ASSIGNMENT_COMMON_H
+#ifndef ZQY_TRAVELING_PURCHASER_COMMON_H
+#define ZQY_TRAVELING_PURCHASER_COMMON_H
 
 
 #include <vector>
@@ -48,4 +48,4 @@ public:
 }
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_COMMON_H
+#endif // ZQY_TRAVELING_PURCHASER_COMMON_H

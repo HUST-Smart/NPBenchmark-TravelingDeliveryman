@@ -4,8 +4,8 @@
 /// note  : 1.	
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_PROBLEM_H
-#define SMART_SZX_GATE_ASSIGNMENT_PROBLEM_H
+#ifndef ZQY_TRAVELING_PURCHASER_PROBLEM_H
+#define ZQY_TRAVELING_PURCHASER_PROBLEM_H
 
 
 #include "Config.h"
@@ -83,4 +83,4 @@ public:
 }
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_PROBLEM_H
+#endif // ZQY_TRAVELING_PURCHASER_PROBLEM_H

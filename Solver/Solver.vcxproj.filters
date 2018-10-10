@@ -42,9 +42,6 @@
     <ClInclude Include="Solver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GateAssignment.pb.h">
-      <Filter>Protocol</Filter>
-    </ClInclude>
     <ClInclude Include="PbReader.h">
       <Filter>Protocol</Filter>
     </ClInclude>
@@ -64,9 +61,6 @@
     </ClCompile>
     <ClCompile Include="Solver.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GateAssignment.pb.cc">
-      <Filter>Protocol</Filter>
     </ClCompile>
     <ClCompile Include="TravelingPurchase.pb.cc">
       <Filter>Protocol</Filter>

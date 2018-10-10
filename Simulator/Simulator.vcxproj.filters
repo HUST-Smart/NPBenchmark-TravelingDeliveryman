@@ -57,9 +57,6 @@
     <ClInclude Include="..\Solver\CsvReader.h">
       <Filter>Solver\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\Solver\GateAssignment.pb.h">
-      <Filter>Solver\Protocol</Filter>
-    </ClInclude>
     <ClInclude Include="..\Solver\PbReader.h">
       <Filter>Solver\Protocol</Filter>
     </ClInclude>
@@ -82,9 +79,6 @@
     </ClCompile>
     <ClCompile Include="..\Solver\Solver.cpp">
       <Filter>Solver\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Solver\GateAssignment.pb.cc">
-      <Filter>Solver\Protocol</Filter>
     </ClCompile>
     <ClCompile Include="..\Solver\TravelingPurchase.pb.cc">
       <Filter>Solver\Protocol</Filter>

@@ -4,8 +4,8 @@
 /// note  : 1.	
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_SOLVER_H
-#define SMART_SZX_GATE_ASSIGNMENT_SOLVER_H
+#ifndef ZQY_TRAVELING_PURCHASER_SOLVER_H
+#define ZQY_TRAVELING_PURCHASER_SOLVER_H
 
 
 #include "Config.h"
@@ -220,4 +220,4 @@ public:
 }
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_SOLVER_H
+#endif // ZQY_TRAVELING_PURCHASER_SOLVER_H

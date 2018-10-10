@@ -26,14 +26,14 @@ int main(int argc, char *argv[]) {
     if (argc > 1) {
         inputPath = argv[1];
     } else {
-        cout << "input path: " << flush;
+        cerr << "input path: " << flush;
         cin >> inputPath;
     }
 
     if (argc > 2) {
         outputPath = argv[2];
     } else {
-        cout << "output path: " << flush;
+        cerr << "output path: " << flush;
         cin >> outputPath;
     }
 	pb::TravelingPurchase::Input input;
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 				flag = 1;
 		}
 		if (flag == 0) {
-			cout << "path " << temp->nodeid() << " to " << (temp + 1)->nodeid() << " is not connected!!" << endl;
+			cerr << "path " << temp->nodeid() << " to " << (temp + 1)->nodeid() << " is not connected!!" << endl;
 			error |= CheckerFlag::DisconnectedError;
 			
 		}
@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
 			for (auto vam = re->valueatmoments().begin(); vam != re->valueatmoments().end(); ++vam) {
 				if (temp->moment() == vam->moment()) {
 					totalValue += vam ->value();
-					reFlag[re->id()] = 1;//标记已被访问
+					reFlag[re->id()] = 1;//标记已被访问的需求
 					break;
 				}
 				else if (temp->moment() <= vam->moment()) {
@@ -92,36 +92,10 @@ int main(int argc, char *argv[]) {
 		
 
 	}
-	cout << "the true totalvalue is " << totalValue << endl;
+	//cout << "the true totalvalue is " << totalValue << endl;
 
    
 
-    //// visualize solution.
-    //double pixelPerMinute = 1;
-    //double pixelPerGate = 30;
-    //int horizonLen = 0;
-    //for (auto flight = input.flights().begin(); flight != input.flights().end(); ++flight) {
-    //    horizonLen = max(horizonLen, flight->turnaround().end());
-    //}
-
-    //auto pos = outputPath.find_last_of('/');
-    //string outputName = (pos == string::npos) ? outputPath : outputPath.substr(pos + 1);
-    //Drawer draw;
-    //draw.begin("Visualization/" + outputName + ".html", horizonLen * pixelPerMinute, input.airport().gates().size() * pixelPerGate, 1, 0);
-    //f = 0;
-    //for (auto gate = output.assignments().begin(); gate != output.assignments().end(); ++gate, ++f) {
-    //    // check constraints.
-    //    if ((*gate < 0) || (*gate >= input.airport().gates().size())) { continue; }
-    //    bool incompat = false;
-    //    for (auto ig = input.flights(f).incompatiblegates().begin(); ig != input.flights(f).incompatiblegates().end(); ++ig) {
-    //        if (*gate == *ig) { incompat = true; break; }
-    //    }
-    //    const auto &flight(input.flights(f));
-    //    draw.rect(flight.turnaround().begin() * pixelPerMinute, *gate * pixelPerGate, 
-    //        (flight.turnaround().end() - flight.turnaround().begin()) * pixelPerMinute, pixelPerGate,
-    //        false, to_string(f), "000000", incompat ? "00c00080" : "4080ff80");
-    //}
-    //draw.end();
-
-    return (error == 0) ? totalValue : ~error;
-}
+int returnCode = (error == 0) ? totalValue  : ~error;
+    cout << returnCode << endl;
+    return returnCode;}
