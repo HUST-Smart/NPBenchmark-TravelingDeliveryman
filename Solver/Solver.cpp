@@ -31,7 +31,7 @@ int Solver::Cli::run(int argc, char * argv[]) {
         { EnvironmentPathOption(), nullptr },
         { ConfigPathOption(), nullptr },
         { LogPathOption(), nullptr }
-    });
+        });
 
     for (int i = 1; i < argc; ++i) { // skip executable name.
         auto mapIter = optionMap.find(argv[i]);
@@ -166,7 +166,7 @@ bool Solver::solve() {
     for (int i = 0; i < workerNum; ++i) {
         // TODO[szx][2]: as *this is captured by ref, the solver should support concurrency itself, i.e., data members should be read-only or independent for each worker.
         // OPTIMIZE[szx][3]: add a list to specify a series of algorithm to be used by each threads in sequence.
-		threadList.emplace_back([&, i]() { success[i] = optimize(solutions[i], i); });
+        threadList.emplace_back([&, i]() { success[i] = optimize(solutions[i], i); });
     }
     for (int i = 0; i < workerNum; ++i) { threadList.at(i).join(); }
 
@@ -175,10 +175,10 @@ bool Solver::solve() {
     Length bestValue = 0;
     for (int i = 0; i < workerNum; ++i) {
         if (!success[i]) { continue; }
-		Log(LogSwitch::Szx::Framework) << "worker " << i << " got " << solutions[i].totalValue << endl;
-		if (solutions[i].totalValue <= bestValue) { continue; }
-		bestIndex = i;
-		bestValue = solutions[i].totalValue;
+        Log(LogSwitch::Szx::Framework) << "worker " << i << " got " << solutions[i].totalValue << endl;
+        if (solutions[i].totalValue <= bestValue) { continue; }
+        bestIndex = i;
+        bestValue = solutions[i].totalValue;
     }
 
     env.rid = to_string(bestIndex);
@@ -195,21 +195,21 @@ void Solver::record() const {
 
     System::MemoryUsage mu = System::peakMemoryUsage();
 
-	Length obj = output.totalValue;
-	Length checkerObj = -1;
-	bool feasible = check(checkerObj);
+    Length obj = output.totalValue;
+    Length checkerObj = -1;
+    bool feasible = check(checkerObj);
 
     // record basic information.
-	log << env.friendlyLocalTime() << ","
-		<< env.rid << ","
-		<< env.instPath << ","
-		<< feasible << "," << (obj - checkerObj) << ","
-		<< output.totalValue << ","
-		<< timer.elapsedSeconds() << ","
-		<< mu.physicalMemory << "," << mu.virtualMemory << ","
-		<< env.randSeed << ","
-		<< cfg.toBriefStr() << ","
-		<< generation << "," << iteration << ",";
+    log << env.friendlyLocalTime() << ","
+        << env.rid << ","
+        << env.instPath << ","
+        << feasible << "," << (obj - checkerObj) << ","
+        << output.totalValue << ","
+        << timer.elapsedSeconds() << ","
+        << mu.physicalMemory << "," << mu.virtualMemory << ","
+        << env.randSeed << ","
+        << cfg.toBriefStr() << ","
+        << generation << "," << iteration << ",";
        // << (100.0 * output.flightNumOnBridge / input.flights().size()) << "%,";
 
     // record solution vector.
@@ -232,11 +232,13 @@ void Solver::record() const {
 
 bool Solver::check(Length &checkerObj) const {
     #if SZX_DEBUG
-	enum CheckerFlag {
-		IoError = 0x0,
-		FormatError = 0x1,
-		DisconnectedError = 0x2,
-		TotalValueError = 0x4
+    enum CheckerFlag {
+        IoError = 0x0,
+        FormatError = 0x1,
+        DisconnectedError = 0x2,
+        MinTimeError = 0x4,
+        TotalTimeError = 0x8,
+        TotalValueError = 0x16
 
     };
 
@@ -245,8 +247,10 @@ bool Solver::check(Length &checkerObj) const {
     checkerObj = ~checkerObj;
     if (checkerObj == CheckerFlag::IoError) { Log(LogSwitch::Checker) << "IoError." << endl; }
     if (checkerObj & CheckerFlag::FormatError) { Log(LogSwitch::Checker) << "FormatError." << endl; }
-	if (checkerObj & CheckerFlag::DisconnectedError) { Log(LogSwitch::Checker) << "DisconnectedError." << endl; }
-	if (checkerObj & CheckerFlag::TotalValueError ) { Log(LogSwitch::Checker) << "TotalValueError." << endl; }
+    if (checkerObj & CheckerFlag::DisconnectedError) { Log(LogSwitch::Checker) << "DisconnectedError." << endl; }
+    if (checkerObj & CheckerFlag::MinTimeError) { Log(LogSwitch::Checker) << "MinTimeError." << endl; }
+    if (checkerObj & CheckerFlag::TotalTimeError) { Log(LogSwitch::Checker) << "TotalTimeError." << endl; }
+    if (checkerObj & CheckerFlag::TotalValueError) { Log(LogSwitch::Checker) << "TotalValueError." << endl; }
     return false;
     #else
     checkerObj = 0;
@@ -255,91 +259,81 @@ bool Solver::check(Length &checkerObj) const {
 }
 
 void Solver::init() {
-//    aux.isCompatible.resize(input.flights().size(), List<bool>(input.airport().gates().size(), true));
-//    ID f = 0;
-//    for (auto flight = input.flights().begin(); flight != input.flights().end(); ++flight, ++f) {
-//        for (auto ig = flight->incompatiblegates().begin(); ig != flight->incompatiblegates().end(); ++ig) {
-//            aux.isCompatible[f][*ig] = false;
-//        }
-//    }
 }
 
 bool Solver::optimize(Solution &sln, ID workerId) {
     Log(LogSwitch::Szx::Framework) << "worker " << workerId << " starts." << endl;
 
-	ID nodeNum = input.nodeid().size();
-	ID edgeNum = input.edges().size();
-	ID requiredNum = input.noderequireds().size();
-	ID periodLength = input.periodlength();
+    ID nodeNum = input.nodeid().size();
+    ID edgeNum = input.edges().size();
+    ID requiredNum = input.noderequireds().size();
+    ID periodLength = input.periodlength();
 
     // reset solution state.
-	
 
-   bool status = true;
-	
-	sln.totalValue = 0;
-	sln.totalTime = 0;
+
+    bool status = true;
+
+    sln.totalValue = 0;
+    sln.totalTime = 0;
 
     // TODO[0]: replace the following random assignment with your own algorithm.
 
-	/*auto &nodeid(*sln.add_nodeidatmoment());
-	nodeid.Resize(edgeNum, Problem::InvalidId);
-	nodeid[0] = input.sourcenode();
-	for (ID i = 1; !timer.isTimeOut() && (i != 1 && nodeid[i - 1] != input.targetnode())&&i<requiredNum; ++i) {
-		nodeid[i] = rand.pick(nodeNum);
-	}*/
-	for (ID j = 0; !timer.isTimeOut() && sln.totalTime < periodLength && j<requiredNum; ++j) {
-		auto &nodeidatmoment(*sln.add_nodeidatmoment());
-		int tempnodeid;
-		int tempmoment;
-		if (j == 0) {
-			tempnodeid = input.sourcenode();
-			tempmoment = 0;
-			nodeidatmoment.set_nodeid (tempnodeid);
-			nodeidatmoment.set_moment (tempmoment);
+    /*auto &nodeid(*sln.add_nodeidatmoment());
+    nodeid.Resize(edgeNum, Problem::InvalidId);
+    nodeid[0] = input.sourcenode();
+    for (ID i = 1; !timer.isTimeOut() && (i != 1 && nodeid[i - 1] != input.targetnode())&&i<requiredNum; ++i) {
+        nodeid[i] = rand.pick(nodeNum);
+    }*/
+    for (ID j = 0; !timer.isTimeOut() && sln.totalTime < periodLength && j < requiredNum; ++j) {
+        auto &nodeidatmoment(*sln.add_nodeidatmoment());
+        int tempnodeid;
+        int tempmoment;
+        if (j == 0) {
+            tempnodeid = input.sourcenode();
+            tempmoment = 0;
+            nodeidatmoment.set_nodeid(tempnodeid);
+            nodeidatmoment.set_moment(tempmoment);
 
-			for (auto re = input.noderequireds().begin(); re != input.noderequireds().end(); ++re) {
-				if (tempnodeid == re->nodeid())
-					for (auto vam = re->valueatmoments().begin(); vam != re->valueatmoments().end(); ++vam) {
-						if (tempmoment== vam->moment()) {
-							sln.totalValue += vam->value();
-							break;
-						}
-						else if (tempmoment <= vam->moment()) {
-							break;
-						}
+            for (auto re = input.noderequireds().begin(); re != input.noderequireds().end(); ++re) {
+                if (tempnodeid == re->nodeid())
+                    for (auto vam = re->valueatmoments().begin(); vam != re->valueatmoments().end(); ++vam) {
+                        if (tempmoment == vam->moment()) {
+                            sln.totalValue += vam->value();
+                            break;
+                        } else if (tempmoment <= vam->moment()) {
+                            break;
+                        }
 
-					}
-			}
+                    }
+            }
 
-		}
-		else {
-			tempnodeid = rand.pick(nodeNum);
-			tempmoment = rand.pick(tempmoment, periodLength);
-			nodeidatmoment.set_nodeid(tempnodeid);
-			nodeidatmoment.set_moment(tempmoment);
-			for (auto re = input.noderequireds().begin(); re != input.noderequireds().end(); ++re) {
-				if (tempnodeid == re->nodeid())
-					for (auto vam = re->valueatmoments().begin(); vam != re->valueatmoments().end(); ++vam) {
-						if (tempmoment == vam->moment()) {
-							sln.totalValue += vam->value();
-							break;
-						}
-						else if (tempmoment <= vam->moment()) {
-							break;
-						}
+        } else {
+            tempnodeid = rand.pick(nodeNum);
+            tempmoment = rand.pick(tempmoment, periodLength);
+            nodeidatmoment.set_nodeid(tempnodeid);
+            nodeidatmoment.set_moment(tempmoment);
+            for (auto re = input.noderequireds().begin(); re != input.noderequireds().end(); ++re) {
+                if (tempnodeid == re->nodeid())
+                    for (auto vam = re->valueatmoments().begin(); vam != re->valueatmoments().end(); ++vam) {
+                        if (tempmoment == vam->moment()) {
+                            sln.totalValue += vam->value();
+                            break;
+                        } else if (tempmoment <= vam->moment()) {
+                            break;
+                        }
 
-					}
-			}
-			if (tempnodeid == input.targetnode()) {
-				break;
-			}	
-			
-		}
-		sln.totalTime = tempmoment;
+                    }
+            }
+            if (tempnodeid == input.targetnode()) {
+                break;
+            }
 
-	}
-	
+        }
+        sln.totalTime = tempmoment;
+
+    }
+
 
     Log(LogSwitch::Szx::Framework) << "worker " << workerId << " ends." << endl;
     return status;
