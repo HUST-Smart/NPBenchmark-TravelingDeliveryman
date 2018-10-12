@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
         DisconnectedError = 0x2,
         MinTimeError = 0x4,
         TotalTimeError = 0x8,
-        TotalValueError = 0x16
+        //TotalValueError = 0x16
     };
 
     string inputPath;
@@ -44,24 +44,19 @@ int main(int argc, char *argv[]) {
     ifstream ifs(outputPath);
     if (!ifs.is_open()) { return ~CheckerFlag::IoError; }
 
-    cout << inputPath << endl;
-
     int periodlength;
-    char temp[5];
+    string temp = "";
     for (int i = 0; i != inputPath.size(); ++i) {
         if (inputPath[i] == 'p') {
             i++;
             while (inputPath[i] != '.') {
-                temp[i] += inputPath[i];         
+                temp += inputPath[i];
                 ++i;
             }
             break;
         }
-
     }
-
-    periodlength = atoi(temp);
-   // cout << "periodlength:" << periodlength << endl;
+    periodlength = atoi(temp.c_str());
 
     string submission;
     getline(ifs, submission); // skip the first line.
@@ -78,7 +73,7 @@ int main(int argc, char *argv[]) {
             error |= CheckerFlag::FormatError;
         }
     }
-    //check connectivity .
+    //check connectivity.
     int totalValue = 0;
     for (auto temp = output.nodeidatmoment().begin(); temp != output.nodeidatmoment().end() - 1; ++temp) {
         int flag1 = 0, flag2 = 1;
@@ -93,7 +88,7 @@ int main(int argc, char *argv[]) {
             error |= CheckerFlag::DisconnectedError;
 
         }
-        //check time;
+        //check time.
         if (flag2 == 0) {
             cerr << "path " << temp->nodeid() << " to " << (temp + 1)->nodeid() << " is less than the minimum time!!" << endl;
             error |= CheckerFlag::MinTimeError;
@@ -114,14 +109,12 @@ int main(int argc, char *argv[]) {
 
                 }
         }
-
         //error |= CheckerFlag::TotalValueError;
 
     }
     //check period.
-    if (output.nodeidatmoment().end()->moment() > periodlength)
+    if ((output.nodeidatmoment().end() - 1)->moment() > periodlength)
         error |= CheckerFlag::TotalTimeError;
-    //cout << "the true totalvalue is " << totalValue << endl;
 
     int returnCode = (error == 0) ? totalValue : ~error;
     cout << returnCode << endl;

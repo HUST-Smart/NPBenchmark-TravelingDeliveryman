@@ -1,4 +1,10 @@
-
+// # 概述
+// 使用 Google 的 Protocol Buffer (简称 protobuf) 定义.
+// 外卖配送问题原始输入输出数据格式.
+// TravelingPurchase 定义了算法所需的全部数据.
+// TravelingPurchase.Input 定义了算法所需的全部输入数据.
+// TravelingPurchase.Output 定义了算法所需的全部输出数据, 应输出至提交文件的第二行以后.
+// TravelingPurchase.Submission 定义了向测评系统提交的计算结果文件的信息摘要, 应输出至提交文件的第一行.
 syntax = "proto3";
 package pb;
 
@@ -13,7 +19,7 @@ message TravelingPurchase { // 求解算法输入输出数据接口.
 		repeated Edge edges=2;//配送路径信息
 		repeated NodeRequired nodeRequireds=3;//节点需求信息（时刻价值信息）
 		int32 sourceNode =4;//配送起始节点
-		int32 targetNode =5;//配送起始节点
+		int32 targetNode =5;//配送终止节点
 		int32 periodLength=6;//周期长度
 	}
 	message Output {//求解算法的输出数据

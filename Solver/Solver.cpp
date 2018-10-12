@@ -238,7 +238,7 @@ bool Solver::check(Length &checkerObj) const {
         DisconnectedError = 0x2,
         MinTimeError = 0x4,
         TotalTimeError = 0x8,
-        TotalValueError = 0x16
+       // TotalValueError = 0x16
 
     };
 
@@ -250,7 +250,7 @@ bool Solver::check(Length &checkerObj) const {
     if (checkerObj & CheckerFlag::DisconnectedError) { Log(LogSwitch::Checker) << "DisconnectedError." << endl; }
     if (checkerObj & CheckerFlag::MinTimeError) { Log(LogSwitch::Checker) << "MinTimeError." << endl; }
     if (checkerObj & CheckerFlag::TotalTimeError) { Log(LogSwitch::Checker) << "TotalTimeError." << endl; }
-    if (checkerObj & CheckerFlag::TotalValueError) { Log(LogSwitch::Checker) << "TotalValueError." << endl; }
+    //if (checkerObj & CheckerFlag::TotalValueError) { Log(LogSwitch::Checker) << "TotalValueError." << endl; }
     return false;
     #else
     checkerObj = 0;
