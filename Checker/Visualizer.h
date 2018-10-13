@@ -16,7 +16,7 @@
 #include <cstdlib>
 
 
-namespace szx {
+namespace zqy {
 
 struct RandColor {
     static constexpr auto ColorCodeChar = "0123456789ABCDEF";

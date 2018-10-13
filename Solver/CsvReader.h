@@ -4,8 +4,8 @@
 /// note  : 1.	
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_CSV_READER_H
-#define SMART_SZX_GATE_ASSIGNMENT_CSV_READER_H
+#ifndef ZQY_TRAVELING_PURCHASER_CSV_READER_H
+#define ZQY_TRAVELING_PURCHASER_CSV_READER_H
 
 
 #include <iostream>
@@ -17,10 +17,10 @@
 
 
 // [off] increase readability instead of stabilization in debug mode (avoid stack overflow).
-#define SMART_SZX_GATE_ASSIGNMENT_CSV_READER_RECURSIVE_VERSION  0
+#define ZQY_TRAVELING_PURCHASER_CSV_READER_RECURSIVE_VERSION  0
 
 
-namespace szx {
+namespace zqy {
 
 class CsvReader {
 public:
@@ -36,11 +36,11 @@ public:
         begin = const_cast<char*>(data.data());  // the const cast can be omitted since C++17.
         end = begin + data.size();
 
-        #if SMART_SZX_GATE_ASSIGNMENT_CSV_READER_RECURSIVE_VERSION
+        #if ZQY_TRAVELING_PURCHASER_CSV_READER_RECURSIVE_VERSION
         onNewLine(begin);
         #else
         onNewLine_opt(begin);
-        #endif // SMART_SZX_GATE_ASSIGNMENT_CSV_READER_RECURSIVE_VERSION
+        #endif // ZQY_TRAVELING_PURCHASER_CSV_READER_RECURSIVE_VERSION
 
         return rows;
     }
@@ -51,7 +51,7 @@ public:
     }
 
 protected:
-    #if SMART_SZX_GATE_ASSIGNMENT_CSV_READER_RECURSIVE_VERSION
+    #if ZQY_TRAVELING_PURCHASER_CSV_READER_RECURSIVE_VERSION
     void onNewLine(char *s) {
         while ((s != end) && (NewLineChars.find(*s) != NewLineChars.end())) { ++s; } // remove empty lines.
         if (s == end) { return; }
@@ -118,10 +118,10 @@ Label_OnSpace:
             goto Label_OnSpace;
         }
     }
-    #endif // SMART_SZX_GATE_ASSIGNMENT_CSV_READER_RECURSIVE_VERSION
+    #endif // ZQY_TRAVELING_PURCHASER_CSV_READER_RECURSIVE_VERSION
 
-    // TODO[szx][2]: handle quote (comma will not end cell).
-    // EXTEND[szx][5]: make trim space configurable.
+    // TODO[zqy][2]: handle quote (comma will not end cell).
+    // EXTEND[zqy][5]: make trim space configurable.
 
     static const std::set<char> NewLineChars;
     static const std::set<char> SpaceChars;
@@ -137,4 +137,4 @@ Label_OnSpace:
 }
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_CSV_READER_H
+#endif // ZQY_TRAVELING_PURCHASER_CSV_READER_H

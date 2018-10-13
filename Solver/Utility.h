@@ -4,8 +4,8 @@
 /// note  : 1.	
 ////////////////////////////////
 
-#ifndef SMART_SZX_GATE_ASSIGNMENT_UTILITY_H
-#define SMART_SZX_GATE_ASSIGNMENT_UTILITY_H
+#ifndef ZQY_TRAVELING_PURCHASER_UTILITY_H
+#define ZQY_TRAVELING_PURCHASER_UTILITY_H
 
 
 #include "Config.h"
@@ -35,7 +35,7 @@
 #define UTILITY_DATE_TIME_CPP_STYLE  0
 
 
-namespace szx {
+namespace zqy {
 
 // if there is "#define x  y", VERBATIM_STRINGIFY(x) will get "x".
 #define VERBATIM_STRINGIFY(x)  #x
@@ -135,14 +135,14 @@ public:
 protected:
     // must not be called except init.
     void allocate(IndexType length) {
-        // TODO[szx][2]: length > (1 << 32)?
+        // TODO[zqy][2]: length > (1 << 32)?
         arr = new T[static_cast<size_t>(length)];
         len = length;
     }
 
     void copyData(T *data) {
-        // TODO[szx][1]: what if data is shorter than arr?
-        // OPTIMIZE[szx][8]: use memcpy() if all callers are POD type.
+        // TODO[zqy][1]: what if data is shorter than arr?
+        // OPTIMIZE[zqy][8]: use memcpy() if all callers are POD type.
         std::copy(data, data + len, arr);
     }
 
@@ -263,8 +263,8 @@ protected:
     }
 
     void copyData(T *data) {
-        // TODO[szx][1]: what if data is shorter than arr?
-        // OPTIMIZE[szx][8]: use memcpy() if all callers are POD type.
+        // TODO[zqy][1]: what if data is shorter than arr?
+        // OPTIMIZE[zqy][8]: use memcpy() if all callers are POD type.
         std::copy(data, data + len, arr);
     }
 
@@ -451,7 +451,7 @@ public:
     static constexpr int SecondsPerMinute = 60;
 
 
-    // TODO[szx][8]: use different names for the arguments.
+    // TODO[zqy][8]: use different names for the arguments.
     DateTime(int year = 0, int month = 0, int day = 0, int hour = 0, int minute = 0, int second = 0)
         : year(year), month(month), day(day), hour(hour), minute(minute), second(second) {}
     DateTime(tm &t) : DateTime(t.tm_year + 1900, t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min) {}
@@ -536,13 +536,13 @@ public:
     };
 
 
-    #if SZX_DEBUG
+    #if ZQY_DEBUG
     static bool isTurnedOn(int level) { return (level == On); }
     static bool isTurnedOff(int level) { return !isTurnedOn(level); }
     #else
     static bool isTurnedOn(int level) { return false; }
     static bool isTurnedOff(int level) { return true; }
-    #endif // SZX_DEBUG
+    #endif // ZQY_DEBUG
 
 
     Log(int logLevel, std::ostream &logFile) : level(logLevel), os(logFile) {}
@@ -749,4 +749,4 @@ public:
 }
 
 
-#endif // SMART_SZX_GATE_ASSIGNMENT_H
+#endif // ZQY_TRAVELING_PURCHASER_H

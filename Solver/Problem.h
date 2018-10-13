@@ -19,7 +19,7 @@
 #include "TravelingPurchase.pb.h"
 
 
-namespace szx {
+namespace zqy {
 
 class Problem {
     #pragma region Type

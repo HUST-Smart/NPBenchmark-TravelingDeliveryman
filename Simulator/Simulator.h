@@ -17,7 +17,7 @@
 #include "../Solver/Utility.h"
 
 
-namespace szx {
+namespace zqy {
 
 using Cmd = Solver::Cli;
 using Env = Solver::Environment;
@@ -25,7 +25,7 @@ using Env = Solver::Environment;
 class Simulator {
     #pragma region Type
 public:
-    // TODO[szx][4]: make it be able to run with serveral env and cfg.
+    // TODO[zqy][4]: make it be able to run with serveral env and cfg.
     struct Task {
         String instSet;
         String instId;

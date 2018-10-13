@@ -14,11 +14,11 @@
 using namespace std;
 
 
-namespace szx {
+namespace zqy {
 
 #pragma region Solver::Cli
 int Solver::Cli::run(int argc, char * argv[]) {
-    Log(LogSwitch::Szx::Cli) << "parse command line arguments." << endl;
+    Log(LogSwitch::Zqy::Cli) << "parse command line arguments." << endl;
     Set<String> switchSet;
     Map<String, char*> optionMap({ // use string as key to compare string contents instead of pointers.
         { InstancePathOption(), nullptr },
@@ -42,7 +42,7 @@ int Solver::Cli::run(int argc, char * argv[]) {
         }
     }
 
-    Log(LogSwitch::Szx::Cli) << "execute commands." << endl;
+    Log(LogSwitch::Zqy::Cli) << "execute commands." << endl;
     if (switchSet.find(HelpSwitch()) != switchSet.end()) {
         cout << HelpInfo() << endl;
     }
@@ -58,7 +58,7 @@ int Solver::Cli::run(int argc, char * argv[]) {
     Solver::Configuration cfg;
     cfg.load(env.cfgPath);
 
-    Log(LogSwitch::Szx::Input) << "load instance " << env.instPath << " (seed=" << env.randSeed << ")." << endl;
+    Log(LogSwitch::Zqy::Input) << "load instance " << env.instPath << " (seed=" << env.randSeed << ")." << endl;
     Problem::Input input;
     if (!input.load(env.instPath)) { return -1; }
 
@@ -71,10 +71,10 @@ int Solver::Cli::run(int argc, char * argv[]) {
     submission.set_duration(to_string(solver.timer.elapsedSeconds()) + "s");
 
     solver.output.save(env.slnPath, submission);
-    #if SZX_DEBUG
+    #if ZQY_DEBUG
     solver.output.save(env.solutionPathWithTime(), submission);
     solver.record();
-    #endif // SZX_DEBUG
+    #endif // ZQY_DEBUG
 
     return 0;
 }
@@ -123,12 +123,12 @@ void Solver::Environment::load(const String &filePath) {
 }
 
 void Solver::Environment::loadWithoutCalibrate(const String &filePath) {
-    // EXTEND[szx][8]: load environment from file.
-    // EXTEND[szx][8]: check file existence first.
+    // EXTEND[zqy][8]: load environment from file.
+    // EXTEND[zqy][8]: check file existence first.
 }
 
 void Solver::Environment::save(const String &filePath) const {
-    // EXTEND[szx][8]: save environment to file.
+    // EXTEND[zqy][8]: save environment to file.
 }
 void Solver::Environment::calibrate() {
     // adjust thread number.
@@ -142,12 +142,12 @@ void Solver::Environment::calibrate() {
 
 #pragma region Solver::Configuration
 void Solver::Configuration::load(const String &filePath) {
-    // EXTEND[szx][5]: load configuration from file.
-    // EXTEND[szx][8]: check file existence first.
+    // EXTEND[zqy][5]: load configuration from file.
+    // EXTEND[zqy][8]: check file existence first.
 }
 
 void Solver::Configuration::save(const String &filePath) const {
-    // EXTEND[szx][5]: save configuration to file.
+    // EXTEND[zqy][5]: save configuration to file.
 }
 #pragma endregion Solver::Configuration
 
@@ -160,22 +160,22 @@ bool Solver::solve() {
     List<Solution> solutions(workerNum, Solution(this));
     List<bool> success(workerNum);
 
-    Log(LogSwitch::Szx::Framework) << "launch " << workerNum << " workers." << endl;
+    Log(LogSwitch::Zqy::Framework) << "launch " << workerNum << " workers." << endl;
     List<thread> threadList;
     threadList.reserve(workerNum);
     for (int i = 0; i < workerNum; ++i) {
-        // TODO[szx][2]: as *this is captured by ref, the solver should support concurrency itself, i.e., data members should be read-only or independent for each worker.
-        // OPTIMIZE[szx][3]: add a list to specify a series of algorithm to be used by each threads in sequence.
+        // TODO[zqy][2]: as *this is captured by ref, the solver should support concurrency itself, i.e., data members should be read-only or independent for each worker.
+        // OPTIMIZE[zqy][3]: add a list to specify a series of algorithm to be used by each threads in sequence.
         threadList.emplace_back([&, i]() { success[i] = optimize(solutions[i], i); });
     }
     for (int i = 0; i < workerNum; ++i) { threadList.at(i).join(); }
 
-    Log(LogSwitch::Szx::Framework) << "collect best result among all workers." << endl;
+    Log(LogSwitch::Zqy::Framework) << "collect best result among all workers." << endl;
     int bestIndex = -1;
     Length bestValue = 0;
     for (int i = 0; i < workerNum; ++i) {
         if (!success[i]) { continue; }
-        Log(LogSwitch::Szx::Framework) << "worker " << i << " got " << solutions[i].totalValue << endl;
+        Log(LogSwitch::Zqy::Framework) << "worker " << i << " got " << solutions[i].totalValue << endl;
         if (solutions[i].totalValue <= bestValue) { continue; }
         bestIndex = i;
         bestValue = solutions[i].totalValue;
@@ -188,7 +188,7 @@ bool Solver::solve() {
 }
 
 void Solver::record() const {
-    #if SZX_DEBUG
+    #if ZQY_DEBUG
     int generation = 0;
 
     ostringstream log;
@@ -213,7 +213,7 @@ void Solver::record() const {
        // << (100.0 * output.flightNumOnBridge / input.flights().size()) << "%,";
 
     // record solution vector.
-    // EXTEND[szx][2]: save solution in log.
+    // EXTEND[zqy][2]: save solution in log.
     log << endl;
 
     // append all text atomically.
@@ -227,11 +227,11 @@ void Solver::record() const {
     }
     logFile << log.str();
     logFile.close();
-    #endif // SZX_DEBUG
+    #endif // ZQY_DEBUG
 }
 
 bool Solver::check(Length &checkerObj) const {
-    #if SZX_DEBUG
+    #if ZQY_DEBUG
     enum CheckerFlag {
         IoError = 0x0,
         FormatError = 0x1,
@@ -255,14 +255,14 @@ bool Solver::check(Length &checkerObj) const {
     #else
     checkerObj = 0;
     return true;
-    #endif // SZX_DEBUG
+    #endif // ZQY_DEBUG
 }
 
 void Solver::init() {
 }
 
 bool Solver::optimize(Solution &sln, ID workerId) {
-    Log(LogSwitch::Szx::Framework) << "worker " << workerId << " starts." << endl;
+    Log(LogSwitch::Zqy::Framework) << "worker " << workerId << " starts." << endl;
 
     ID nodeNum = input.nodeid().size();
     ID edgeNum = input.edges().size();
@@ -335,7 +335,7 @@ bool Solver::optimize(Solution &sln, ID workerId) {
     }
 
 
-    Log(LogSwitch::Szx::Framework) << "worker " << workerId << " ends." << endl;
+    Log(LogSwitch::Zqy::Framework) << "worker " << workerId << " ends." << endl;
     return status;
 }
 #pragma endregion Solver

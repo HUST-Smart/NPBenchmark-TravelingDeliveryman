@@ -55,7 +55,7 @@ namespace Analyzer {
 
 
         public void loadParam() {
-            // EXTEND[szx][9]: load from file when provided?
+            // EXTEND[zqy][9]: load from file when provided?
             param.plateNum = 100;
             param.plateWidth = 6000;
             param.plateHeight = 3210;

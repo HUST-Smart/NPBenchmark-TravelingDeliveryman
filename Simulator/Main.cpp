@@ -2,7 +2,7 @@
 
 
 using namespace std;
-using namespace szx;
+using namespace zqy;
 
 
 int main() {
